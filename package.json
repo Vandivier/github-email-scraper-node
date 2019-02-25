@@ -1,0 +1,19 @@
+{
+  "name": "github-email-scraper-node",
+  "version": "1.0.0",
+  "description": "specify region search strings, get Github user email addresses. In Node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vandivier/github-email-scraper-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vandivier/github-email-scraper-node/issues"
+  },
+  "homepage": "https://github.com/Vandivier/github-email-scraper-node#readme"
+}
