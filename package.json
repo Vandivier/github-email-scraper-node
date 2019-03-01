@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Vandivier/github-email-scraper-node/issues"
   },
-  "homepage": "https://github.com/Vandivier/github-email-scraper-node#readme"
+  "homepage": "https://github.com/Vandivier/github-email-scraper-node#readme",
+  "dependencies": {
+    "eslint": "^5.14.1"
+  }
 }
