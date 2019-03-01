@@ -4,6 +4,10 @@ const EOL = require('os').EOL;
 
 const scrapeUtils = require('./scrape-utils');
 
+const oRecordFromSource = {
+  sLocationMatched: 0,
+};
+
 const oTitleLine = {
   sEmail: 'Email Address',
   sGithubUrl: 'Entry ID',
@@ -11,30 +15,32 @@ const oTitleLine = {
   sLocationMatched: 'Location',
   sName: 'Name',
   sScrapedUrl: 'Scraped Url',
-  sUserName: 'Username',
 };
 
 sUniqueKey = 'sEmail';
 
 // TODO: get oInputRecord from sInputRow
-scrapeUtils.exec({ oTitleLine, sUniqueKey, fsGetUrlToScrapeByInputRecord, fpScrapeInputRecordOuter });
+scrapeUtils.exec({ fpScrapeInputRecordOuter, fsGetUrlToScrapeByInputRecord, oRecordFromSource, oTitleLine, sUniqueKey });
 
 function fsGetUrlToScrapeByInputRecord(oInputRow) {
   return 'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRow.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l=';
 }
 
 async function fpScrapeInputRecordInner(oInputRow) {
-  let arroOutputRecords = {
-    sEmail: 'Email Address',
-    sGithubUrl: 'Entry ID',
-    sGithubUsername: 'Entry ID',
-    sLocationMatched: 'Location',
-    sName: 'Name',
-    sScrapedUrl: 'Scraped Url',
-    sUserName: 'Username',
-  };
+  const arrpoOutputRow = [...document.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
+    const $user = $email.parentElement.parentElement.parentElement;
 
-  return Promise.resolve(arroOutputRecords);
+    return {
+      sEmail: $email.textContent,
+      sGithubUrl: $user.querySelector('a').href,
+      sGithubUsername: $user.querySelector('a').text,
+      sLocationMatched: oInputRow.sLocationMatched,
+      sName: $user.querySelector('div.d-block').textContent,
+      sScrapedUrl: oInputRow.sScrapedUrl,
+    };
+  });
+
+  return Promise.resolve(arrpoOutputRow);
 }
 
 // not generalizable or temporally reliable in case of a site refactor
