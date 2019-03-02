@@ -14,7 +14,9 @@ const sOutputFilePath = './output.csv';
 const fpReadFile = util.promisify(fs.readFile);
 const fpWriteFile = util.promisify(fs.writeFile);
 
-let oServiceThis = {};
+let oServiceThis = {
+  browser: {},
+};
 
 let oCache = JSON.parse(fs.readFileSync(sCacheFilePath, 'utf8'));
 //const rsReadStream = fs.createReadStream('./location-strings.txt');
@@ -24,11 +26,16 @@ let iCurrentInputRecord = 0;
 let iTotalInputRecords = 0;
 
 oServiceThis.exec = async function(oConfig) {
-  oServiceThis = Object.assign(oServiceThis, oConfig);
+  try {
+    oServiceThis = Object.assign(oServiceThis, oConfig);
 
-  oServiceThis.arrTableColumnKeys = Object.keys(oServiceThis.oTitleLine);
+    oServiceThis.arrTableColumnKeys = Object.keys(oServiceThis.oTitleLine);
 
-  await main();
+    await main();
+  } catch (e) {
+    console.log('error caught in exec', e);
+    await fpEndProgram();
+  }
 };
 
 async function main() {
@@ -83,14 +90,22 @@ async function fpHandleData(oInputRecord) {
   if (typeof oInputRecord === 'object') {
     const _oInputRecord = Object.assign({}, oInputRecord); // dereference for safety, shouldn't be needed tho
     _oInputRecord.sScrapedUrl = oServiceThis.fsGetUrlToScrapeByInputRecord(_oInputRecord);
+    const bValidUrl =
+      _oInputRecord.sScrapedUrl &&
+      typeof _oInputRecord.sScrapedUrl === 'string' &&
+      /(http)(s)*(:\/\/)(.)*\.(\w+)/.test(_oInputRecord.sScrapedUrl);
 
-    // one input record produces an array of output records
-    let arroResult = oCache[_oInputRecord.sScrapedUrl];
-    if (!arroResult) arroResult = await oServiceThis.fpbSkipInput(_oInputRecord);
-    if (!arroResult) arroResult = await oServiceThis.fpScrapeInputWrapper(_oInputRecord);
-    if (!arroResult) {
-      console.log('error: unexpectedly did not find fpHandleData.arroResult for input record #' + iCurrentInputRecord);
-      arroResult = [];
+    if (bValidUrl) {
+      // one input record produces an array of output records
+      let arroResult = oCache[_oInputRecord.sScrapedUrl];
+      if (!arroResult) arroResult = await oServiceThis.fpbSkipInput(_oInputRecord);
+      if (!arroResult) arroResult = await oServiceThis.fpScrapeInputWrapper(_oInputRecord);
+      if (!arroResult) {
+        console.log('error: unexpectedly did not find fpHandleData.arroResult for input record #' + iCurrentInputRecord);
+        arroResult = [];
+      }
+    } else {
+      console.log('error: bad value for _oInputRecord.sScrapedUrl in fpHandleData for input record #' + iCurrentInputRecord);
     }
   }
 
@@ -111,9 +126,9 @@ oServiceThis.fpbSkipInput = async function() {
 // provides some reasonable puppeteer defaults
 // attached to exported service in case it need to be overwritten
 oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
-  const page = await browser.newPage();
+  const page = await oServiceThis.browser.newPage();
 
-  await page.goto(oInputRecord.sUrl, {
+  await page.goto(oInputRecord.sScrapedUrl, {
     timeout: 0,
   });
 

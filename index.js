@@ -20,10 +20,11 @@ const oTitleLine = {
 
 sUniqueKey = 'sEmail';
 
-scrapeUtils.exec({ fEvaluate, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
-
 function fsGetUrlToScrapeByInputRecord(oInputRecord) {
-  return 'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRecord.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l=';
+  return (
+    oInputRecord.sLocationMatched &&
+    'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRecord.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l='
+  );
 }
 
 async function fpInnerScrapeRecord(oInputRecord) {
@@ -51,3 +52,5 @@ fEvaluate = async oInputRecord => {
     return err;
   });
 };
+
+scrapeUtils.exec({ fEvaluate, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
