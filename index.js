@@ -4,7 +4,7 @@ const EOL = require('os').EOL;
 
 const scrapeUtils = require('./scrape-utils');
 
-const oRecordFromSource = {
+const oSourceMap = {
   sLocationMatched: 0,
 };
 
@@ -20,7 +20,7 @@ const oTitleLine = {
 sUniqueKey = 'sEmail';
 
 // TODO: get oInputRecord from sInputRow
-scrapeUtils.exec({ fpScrapeInputRecordOuter, fsGetUrlToScrapeByInputRecord, oRecordFromSource, oTitleLine, sUniqueKey });
+scrapeUtils.exec({ fpScrapeInputRecordOuter, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
 
 function fsGetUrlToScrapeByInputRecord(oInputRow) {
   return 'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRow.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l=';
