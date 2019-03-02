@@ -29,8 +29,6 @@ async function exec(oConfig) {
 
   oServiceThis.arrTableColumnKeys = Object.keys(oServiceThis.oTitleLine);
 
-  // fpScrapeInputRecordOuter, oRecordFromSource, sUniqueKey;
-
   await main();
 }
 
@@ -43,9 +41,12 @@ async function main() {
   sInputCsv = await fpReadFile(sInputFilePath, 'utf8');
   arrsInputRows = sInputCsv.split(EOL).filter(sLine => sLine); // drop title line and empty trailing lines
 
-  /** for testing only, shorten rows **/
-  //arrsInputRows = arrsInputRows.slice(0, 5);
-  arrsInputRows.shift();
+  if (process.env.SUBSAMPLE && process.env.SUBSAMPLE < arrsInputRows.length) {
+    // useful while developing / testing
+    arrsInputRows = arrsInputRows.slice(0, process.env.SUBSAMPLE);
+  }
+
+  arrsInputRows.shift(); // drop title row
   iTotalInputRecords = arrsInputRows.length;
 
   if (typeof oCache !== 'object' || !iTotalInputRecords) {
@@ -57,7 +58,7 @@ async function main() {
   console.log('early count, iTotalInputRecords = ' + iTotalInputRecords);
   browser = await puppeteer.launch();
 
-  await utils.forEachReverseAsyncPhased(arrsInputRows, async function(_sInputRecord, i) {
+  await utils.forEachReverseAsyncPhased(arrsInputRows, async function(_sInputRecord) {
     // TODO: automatically detect title line and expand object using oTitleLine
     const arrsCells = _sInputRecord.split(',');
 
@@ -67,17 +68,17 @@ async function main() {
       return oAcc;
     }, {});
 
-    return fpHandleData(oRecordFromSource, i); // WIP
+    return fpHandleData(oRecordFromSource);
   });
 
   fpEndProgram();
 }
 
-async function fpHandleData(oInputRecord, i) {
+async function fpHandleData(oInputRecord) {
   const oRecord = JSON.parse(JSON.stringify(oMinimalRecord)); // dereference for safety, shouldn't be needed tho
 
   oRecord.sScrapedUrl = oServiceThis.fsGetUrlToScrapeByInputRecord(oRecord);
-  await fpScrapeInputRecord(oRecord);
+  await oServiceThis.fpScrapeInputRecord(oRecord);
 
   iCurrentInputRecord++;
   console.log('scraped input record #: ' + iCurrentInputRecord + '/' + iTotalInputRecords + EOL);

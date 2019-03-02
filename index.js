@@ -5,6 +5,7 @@ const EOL = require('os').EOL;
 const scrapeUtils = require('./scrape-utils');
 
 const oSourceMap = {
+  // TODO: don't explicitly pass oSourceMap and just read from input.csv
   sLocationMatched: 0,
 };
 
@@ -20,13 +21,13 @@ const oTitleLine = {
 sUniqueKey = 'sEmail';
 
 // TODO: get oInputRecord from sInputRow
-scrapeUtils.exec({ fpScrapeInputRecordOuter, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
+scrapeUtils.exec({ fpScrapeInputRecord, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
 
 function fsGetUrlToScrapeByInputRecord(oInputRow) {
   return 'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRow.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l=';
 }
 
-async function fpScrapeInputRecordInner(oInputRow) {
+async function fpInnerScrapeRecord(oInputRow) {
   const arrpoOutputRow = [...document.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
     const $user = $email.parentElement.parentElement.parentElement;
 
@@ -44,7 +45,7 @@ async function fpScrapeInputRecordInner(oInputRow) {
 }
 
 // not generalizable or temporally reliable in case of a site refactor
-async function fpScrapeInputRecordOuter(oInputRow) {
+async function fpScrapeInputRecord(oInputRow) {
   const _page = await browser.newPage();
   let oCachedResult = oCache[oInputRow.sId];
   let oMergedRecord;
@@ -65,9 +66,9 @@ async function fpScrapeInputRecordOuter(oInputRow) {
         console.log('scraping: ' + window.location.href);
 
         return _fpWait(500)
-          .then(fpScrapeInputRecordInner)
+          .then(fpInnerScrapeRecord)
           .catch(function(err) {
-            console.log('fpScrapeInputRecordInner err: ', err);
+            console.log('fpInnerScrapeRecord err: ', err);
             return err;
           });
 
@@ -115,7 +116,7 @@ async function fpScrapeInputRecordOuter(oInputRow) {
     if (ConsoleMessage.type() === 'log') {
       console.log(ConsoleMessage.text() + EOL);
     }
-    if (ConsoleMessage.type() === 'error' || ConsoleMessage.text().includes('fpScrapeInputRecordInner err')) {
+    if (ConsoleMessage.type() === 'error' || ConsoleMessage.text().includes('fpInnerScrapeRecord err')) {
       console.log(ConsoleMessage);
     }
   }
