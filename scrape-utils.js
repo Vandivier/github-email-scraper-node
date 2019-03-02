@@ -14,23 +14,22 @@ const sOutputFilePath = './output.csv';
 const fpReadFile = util.promisify(fs.readFile);
 const fpWriteFile = util.promisify(fs.writeFile);
 
-const oServiceThis = {};
+let oServiceThis = {};
 
 let oCache = JSON.parse(fs.readFileSync(sCacheFilePath, 'utf8'));
 //const rsReadStream = fs.createReadStream('./location-strings.txt');
 const wsWriteStream = fs.createWriteStream(sOutputFilePath);
 
-let browser;
 let iCurrentInputRecord = 0;
 let iTotalInputRecords = 0;
 
-async function exec(oConfig) {
+oServiceThis.exec = async function(oConfig) {
   oServiceThis = Object.assign(oServiceThis, oConfig);
 
   oServiceThis.arrTableColumnKeys = Object.keys(oServiceThis.oTitleLine);
 
   await main();
-}
+};
 
 async function main() {
   let sInputCsv;
@@ -56,13 +55,16 @@ async function main() {
   }
 
   console.log('early count, iTotalInputRecords = ' + iTotalInputRecords);
-  browser = await puppeteer.launch();
+  oServiceThis.browser = await puppeteer.launch();
 
   await utils.forEachReverseAsyncPhased(arrsInputRows, async function(_sInputRecord) {
     // TODO: automatically detect title line and expand object using oTitleLine
     const arrsCells = _sInputRecord.split(',');
+    const arrsInputColumnTitles = Object(oServiceThis.oSourceMap).keys || [];
 
-    const oRecordFromSource = Object(oServiceThis.oSourceMap).keys.reduce((oAcc, sKey) => {
+    console.log('arrsInputColumnTitles', arrsInputColumnTitles);
+
+    const oRecordFromSource = arrsInputColumnTitles.reduce((oAcc, sKey) => {
       const iValueIndex = oServiceThis.oSourceMap[sKey];
       oAcc[sKey] = arrsCells[iValueIndex];
       return oAcc;
@@ -75,23 +77,99 @@ async function main() {
 }
 
 async function fpHandleData(oInputRecord) {
-  const oRecord = JSON.parse(JSON.stringify(oMinimalRecord)); // dereference for safety, shouldn't be needed tho
-
-  oRecord.sScrapedUrl = oServiceThis.fsGetUrlToScrapeByInputRecord(oRecord);
-  await oServiceThis.fpScrapeInputRecord(oRecord);
-
   iCurrentInputRecord++;
-  console.log('scraped input record #: ' + iCurrentInputRecord + '/' + iTotalInputRecords + EOL);
 
+  // make sure it's not undefined, null, or an unexpected data type
+  if (typeof oInputRecord === 'object') {
+    const _oInputRecord = Object.assign({}, oInputRecord); // dereference for safety, shouldn't be needed tho
+    _oInputRecord.sScrapedUrl = oServiceThis.fsGetUrlToScrapeByInputRecord(_oInputRecord);
+
+    // one input record produces an array of output records
+    let arroResult = oCache[_oInputRecord.sScrapedUrl];
+    if (!arroResult) arroResult = await oServiceThis.fpbSkipInput(_oInputRecord);
+    if (!arroResult) arroResult = await oServiceThis.fpScrapeInputWrapper(_oInputRecord);
+    if (!arroResult) {
+      console.log('error: unexpectedly did not find fpHandleData.arroResult for input record #' + iCurrentInputRecord);
+      arroResult = [];
+    }
+  }
+
+  console.log('scraped input record #: ' + iCurrentInputRecord + '/' + iTotalInputRecords + EOL);
   return Promise.resolve();
 }
+
+// utility method to block certain records from getting scraped
+// in theory you could just remove bad records from source,
+//      but sometimes that's alot of work ;)
+// defaults to skipping no records. Pass in oServiceThis.config if to overwrite
+// should return a promise which resolves to an empty arr
+oServiceThis.fpbSkipInput = async function() {
+  return Promise.resolve(false);
+};
+
+// responsible for handling the page configuration
+// provides some reasonable puppeteer defaults
+// attached to exported service in case it need to be overwritten
+oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
+  const page = await browser.newPage();
+
+  await page.goto(oInputRecord.sUrl, {
+    timeout: 0,
+  });
+
+  await page.content();
+  page.on('console', oServiceThis.fOnScraperLog); // ref: https://stackoverflow.com/a/47460782/3931488
+
+  const oResult = await page
+    .evaluate(_oInputRecord => oServiceThis.fEvaluate, oInputRecord)
+    .catch(function(error) {
+      const sOutputFileErrorColumn = oInputRecord[sUniqueKey];
+      console.log('error scraping record: ', oInputRecord, error);
+      return { sOutputFileErrorColumn: 'error' };
+    });
+
+  const oDereferencedResult = JSON.parse(JSON.stringify(oResult));
+
+  await _page.close();
+
+  oCache[oInputRecord.sId] = oDereferencedResult;
+  fsRecordToCsvLine(oDereferencedResult);
+
+  if (oDereferencedResult.oNextInputRecord) {
+    // deceptively simple, dangerously recursive
+    await fpHandleData(oMergedRecord.oNextInputRecord);
+  }
+
+  return oDereferencedResult;
+};
+
+oServiceThis.fOnScraperLog = function(ConsoleMessage) {
+  if (ConsoleMessage.type() === 'log') {
+    console.log(ConsoleMessage.text() + EOL);
+  } else if (ConsoleMessage.type() === 'error') {
+    console.log(ConsoleMessage);
+  } else {
+    console.log('Unknown log message format, logged within scraper context: ', ConsoleMessage);
+  }
+};
+
+// intended to be overwritten by lib user with user-specific business logic
+// should return an array of output records which will be written to output.csv
+// default to returning an empty array
+// naming highlights the intended similarity to puppeteer's page.evaluate
+oServiceThis.fEvaluate = async function(oInputRecord) {
+  return Promise.resolve([]);
+};
 
 function fsRecordToCsvLine(oRecord) {
   utils.fsRecordToCsvLine(oRecord, oServiceThis.arrTableColumnKeys, wsWriteStream);
 }
 
 async function fpEndProgram() {
-  await browser.close();
+  if (oServiceThis.browser) {
+    await oServiceThis.browser.close();
+  }
+
   await fpWriteCache();
   process.exit();
 }
