@@ -61,4 +61,4 @@ typings/
 .next
 
 #github credentials
-creds.txt
+creds.js

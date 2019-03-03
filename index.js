@@ -4,6 +4,9 @@ const EOL = require('os').EOL;
 
 const scrapeUtils = require('./scrape-utils');
 
+// ref: https://github.com/emadehsan/thal
+const CREDS = require('./creds');
+
 const oSourceMap = {
   // TODO: don't explicitly pass oSourceMap and just read from input.csv
   sLocationMatched: 0,
@@ -27,17 +30,24 @@ function fsGetUrlToScrapeByInputRecord(oInputRecord) {
   );
 }
 
-fEvaluate = async oInputRecord => {
-  console.log('scraping: ' + window.location.href);
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return fpInnerScrapeRecord(oInputRecord).catch(function(err) {
-    console.log('fpInnerScrapeRecord err: ', err);
-    return err;
-  });
+fpEvaluate = async oInputRecord => {
+  let oResult = {};
 
-  async function fpInnerScrapeRecord(oInputRecord) {
-    const arrpoOutputRow = [...document.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
-      const $user = $email.parentElement.parentElement.parentElement;
+  console.log('scraping: ' + window.location.href);
+  await new Promise(resolve => setTimeout(resolve, 500)); // let dynamic content load
+
+  try {
+    oResult = fInnerScrapeRecord(oInputRecord);
+  } catch (err) {
+    console.log('fpInnerScrapeRecord err: ', err);
+    oResult = { err };
+  }
+
+  return oResult;
+
+  function fInnerScrapeRecord(oInputRecord) {
+    const arrpoOutputRow = [...document.body.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
+      const $user = $email.parentElement; // .parentElement.parentElement;
 
       return {
         sEmail: $email.textContent,
@@ -49,15 +59,36 @@ fEvaluate = async oInputRecord => {
       };
     });
 
-    return Promise.resolve(arrpoOutputRow);
+    return arrpoOutputRow;
   }
+};
+
+// ref: https://github.com/emadehsan/thal
+fpLogin = async page => {
+  const USERNAME_SELECTOR = '#login_field';
+  const PASSWORD_SELECTOR = '#password';
+  const BUTTON_SELECTOR = 'input[type=submit][name=commit]';
+
+  await page.goto('https://github.com/login');
+  await page.click(USERNAME_SELECTOR);
+  await page.keyboard.type(CREDS.username);
+  await page.click(PASSWORD_SELECTOR);
+  await page.keyboard.type(CREDS.password);
+  await page.click(BUTTON_SELECTOR);
+  await page.waitForNavigation();
+  await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
+
+  const sSignedInText = await page.evaluate(() => document.querySelector('#user-links').textContent.trim());
+  const bLoginSucceeded = sSignedInText.includes('Signed in as ' + CREDS.username);
+
+  console.log('login succeeded?: ' + bLoginSucceeded);
 };
 
 async function main() {
   if (process.env.DEBUG) {
     debugger;
   }
-  scrapeUtils.exec({ fEvaluate, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
+  scrapeUtils.exec({ fpEvaluate, fpLogin, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
 }
 
 main();

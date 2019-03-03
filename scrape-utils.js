@@ -63,6 +63,14 @@ async function main() {
   console.log('early count, iTotalInputRecords = ' + iTotalInputRecords);
   oServiceThis.browser = await puppeteer.launch();
 
+  if (oServiceThis.fpLogin) {
+    // TODO: do i need to be logged into scrape page or just scrape browser?
+    console.log('logging in');
+    const page = await oServiceThis.browser.newPage();
+    await oServiceThis.fpLogin(page);
+    await page.close();
+  }
+
   await utils.forEachReverseAsyncPhased(arrsInputRows, async function(_sInputRecord) {
     // TODO: automatically detect title line and expand object using oTitleLine
     const arrsCells = _sInputRecord.split(',');
@@ -132,12 +140,12 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
   await page.content();
   page.on('console', oServiceThis.fOnScraperLog); // ref: https://stackoverflow.com/a/47460782/3931488
 
-  const oResult = await page.evaluate(oServiceThis.fEvaluate, oInputRecord).catch(function(error) {
-    const sOutputFileErrorColumn = oInputRecord[sUniqueKey];
+  const oResult = await page.evaluate(oServiceThis.fpEvaluate, oInputRecord).catch(function(error) {
     console.log('error scraping record: ', oInputRecord, error);
     return { sOutputFileErrorColumn: 'error' };
   });
 
+  console.log(oResult);
   const oDereferencedResult = JSON.parse(JSON.stringify(oResult));
 
   await page.close();
@@ -167,7 +175,7 @@ oServiceThis.fOnScraperLog = function(ConsoleMessage) {
 // should return an array of output records which will be written to output.csv
 // default to returning an empty array
 // naming highlights the intended similarity to puppeteer's page.evaluate
-oServiceThis.fEvaluate = async function(oInputRecord) {
+oServiceThis.fpEvaluate = async function(oInputRecord) {
   return Promise.resolve([]);
 };
 
