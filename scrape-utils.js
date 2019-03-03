@@ -95,12 +95,8 @@ async function fpHandleData(oInputRecord) {
   if (typeof oInputRecord === 'object') {
     const _oInputRecord = Object.assign({}, oInputRecord); // dereference for safety, shouldn't be needed tho
     _oInputRecord.sScrapedUrl = oServiceThis.fsGetUrlToScrapeByInputRecord(_oInputRecord);
-    const bValidUrl =
-      _oInputRecord.sScrapedUrl &&
-      typeof _oInputRecord.sScrapedUrl === 'string' &&
-      /(http)(s)*(:\/\/)(.)*\.(\w+)/.test(_oInputRecord.sScrapedUrl);
 
-    if (bValidUrl) {
+    if (fbIsValidUrlToScrape(_oInputRecord.sScrapedUrl)) {
       // one input record produces an array of output records
       let arroResult = oCache[_oInputRecord.sScrapedUrl];
       if (!arroResult) arroResult = await oServiceThis.fpbSkipInput(_oInputRecord);
@@ -145,15 +141,18 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
     return { sOutputFileErrorColumn: 'error' };
   });
 
-  console.log(oResult);
+  console.log('result: ', oResult);
   const oDereferencedResult = JSON.parse(JSON.stringify(oResult));
 
   await page.close();
 
   oCache[oInputRecord.sScrapedUrl] = oDereferencedResult;
-  fsRecordToCsvLine(oDereferencedResult);
 
-  if (oDereferencedResult.oNextInputRecord) {
+  if (Array.isArray(oDereferencedResult.arrpoOutputRows) && oDereferencedResult.arrpoOutputRows.length) {
+    oDereferencedResult.arrpoOutputRows.forEach(fsRecordToCsvLine);
+  }
+
+  if (oDereferencedResult.oNextInputRecord && fbIsValidUrlToScrape(oDereferencedResult.oNextInputRecord.sScrapedUrl)) {
     // deceptively simple, dangerously recursive
     await fpHandleData(oMergedRecord.oNextInputRecord);
   }
@@ -211,6 +210,10 @@ async function fpWriteCache() {
   });
 
   return Promise.resolve();
+}
+
+function fbIsValidUrlToScrape(s) {
+  return s && typeof s === 'string' && /(http)(s)*(:\/\/)(.)*\.(\w+)/.test(s);
 }
 
 module.exports = oServiceThis;

@@ -46,22 +46,29 @@ fpEvaluate = async oInputRecord => {
   return oResult;
 
   function fInnerScrapeRecord(oInputRecord) {
-    const arrpoOutputRow = [...document.body.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
-      const $user = $email.parentElement; // .parentElement.parentElement;
+    const arrpoOutputRows = [...document.body.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
+      const $user = $email.parentElement && $email.parentElement.parentElement && $email.parentElement.parentElement.parentElement;
+
+      if (!$email || !$user) {
+        return {};
+      }
 
       return {
         sEmail: $email.textContent,
-        /*
         sGithubUrl: $user.querySelector('a').href,
         sGithubUsername: $user.querySelector('a').text,
         sLocationMatched: oInputRecord.sLocationMatched,
-        sName: $user.querySelector('div.d-block').textContent,
+        sName: $user.querySelector('div.d-block') && $user.querySelector('div.d-block').textContent,
         sScrapedUrl: oInputRecord.sScrapedUrl,
-        */
       };
     });
 
-    return arrpoOutputRow;
+    return {
+      arrpoOutputRows,
+      oNextInputRecord: Object.assign({}, oInputRecord, {
+        sScrapedUrl: document.querySelector('.next_page').href,
+      }),
+    };
   }
 };
 
