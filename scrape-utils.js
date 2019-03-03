@@ -39,6 +39,7 @@ oServiceThis.exec = async function(oConfig) {
 };
 
 async function main() {
+  let bLoginSuccess = false;
   let sInputCsv;
   let arrsInputRows;
 
@@ -57,18 +58,26 @@ async function main() {
   if (typeof oCache !== 'object' || !iTotalInputRecords) {
     // don't waste time or requests if there's a problem
     console.log('error obtaining oFirstNameCache');
-    fpEndProgram();
+    await fpEndProgram();
   }
 
   console.log('early count, iTotalInputRecords = ' + iTotalInputRecords);
   oServiceThis.browser = process.env.DEBUG ? await puppeteer.launch({ headless: false }) : await puppeteer.launch();
 
-  if (oServiceThis.fpLogin) {
+  if (oServiceThis.fpbLogin) {
     // TODO: do i need to be logged into scrape page or just scrape browser?
     console.log('logging in');
     const page = await oServiceThis.browser.newPage();
-    await oServiceThis.fpLogin(page);
+
+    try {
+      bLoginSuccess = await oServiceThis.fpbLogin(page);
+    } catch (err) {
+      console.log('error while loggin in: ', err);
+      bLoginSuccess = false;
+    }
+
     await page.close();
+    if (!bLoginSuccess) await fpEndProgram();
   }
 
   await utils.forEachReverseAsyncPhased(arrsInputRows, async function(_sInputRecord) {
@@ -85,7 +94,7 @@ async function main() {
     return fpHandleData(oRecordFromSource);
   });
 
-  fpEndProgram();
+  await fpEndProgram();
 }
 
 async function fpHandleData(oInputRecord) {

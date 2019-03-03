@@ -73,24 +73,28 @@ fpEvaluate = async oInputRecord => {
 };
 
 // ref: https://github.com/emadehsan/thal
-fpLogin = async page => {
+// TODO: login and logout routines are similar so some logic could be extracted to a function
+fpbLogin = async page => {
   let bLogoutResolved = false;
+  let bLoginResolved = false;
   const USERNAME_SELECTOR = '#login_field';
   const PASSWORD_SELECTOR = '#password';
   const BUTTON_SELECTOR = 'input[type=submit][name=commit]';
   const BUTTON_LOGOUT_SELECTOR = 'input[value="Sign out"]';
 
+  /*
   await page.goto('https://github.com/logout'); // in case browser persisted an old session
   await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
+
   const bSignoutButtonExists = await page.evaluate(() => document.querySelector('input[value="Sign out"]') !== null);
 
   if (bSignoutButtonExists) {
     // ref: https://github.com/GoogleChrome/puppeteer/issues/1412#issuecomment-402725036
-    const navigationPromise = page.waitForNavigation().then(() => {
+    const pLogoutNavigation = page.waitForNavigation().then(() => {
       !bLogoutResolved && console.log('confirmed logged out of old session');
     });
 
-    const timeBasedPromise = new Promise(resolve => {
+    const pLogoutTimeout = new Promise(resolve => {
       setTimeout(() => {
         !bLogoutResolved && console.log('log out confirmation is taking a while, proceeding to login without logout confirmation');
         resolve();
@@ -99,38 +103,65 @@ fpLogin = async page => {
 
     await page.click(BUTTON_LOGOUT_SELECTOR);
     console.log('sign out button found and clicked');
-
-    await Promise.race([navigationPromise, timeBasedPromise]);
+    await Promise.race([pLogoutNavigation, pLogoutTimeout]);
     bLogoutResolved = true;
-
     await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
   } else {
     console.log('could not find sign out button. proceeding to log in.');
   }
+  */
 
   await page.goto('https://github.com/login');
-  await page.click(USERNAME_SELECTOR);
-  await page.keyboard.type(CREDS.username);
-  await page.click(PASSWORD_SELECTOR);
-  await page.keyboard.type(CREDS.password);
-  await page.click(BUTTON_SELECTOR);
+  let sSignedInText = await page.evaluate(
+    () => document.querySelector('#user-links') && document.querySelector('#user-links').textContent.trim()
+  );
+  let bLoginConfirmed = sSignedInText && sSignedInText.includes('Signed in as ' + CREDS.username);
 
-  console.log('log in form found, filled, and submitted');
+  if (bLoginConfirmed) {
+    console.log('already logged in');
+  } else {
+    await page.click(USERNAME_SELECTOR);
+    await page.keyboard.type(CREDS.username);
+    await page.click(PASSWORD_SELECTOR);
+    await page.keyboard.type(CREDS.password);
 
-  await page.waitForNavigation();
-  await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
+    const pLoginNavigation = page.waitForNavigation().then(() => {
+      !bLoginResolved && console.log('confirmed logged in');
+    });
 
-  const sSignedInText = await page.evaluate(() => document.querySelector('#user-links').textContent.trim());
-  const bLoginSucceeded = sSignedInText.includes('Signed in as ' + CREDS.username);
+    const pLoginTimeout = new Promise(resolve => {
+      setTimeout(() => {
+        !bLoginResolved && console.log('log in confirmation is taking a while, eagerly checking login status...');
+        resolve();
+      }, 5000);
+    });
 
-  console.log('login succeeded?: ' + bLoginSucceeded);
+    await page.click(BUTTON_SELECTOR);
+    console.log('log in form found, filled, and submitted');
+    await Promise.race([pLoginNavigation, pLoginTimeout]);
+    bLoginResolved = true;
+    await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
+
+    sSignedInText = await page.evaluate(
+      () => document.querySelector('#user-links') && document.querySelector('#user-links').textContent.trim()
+    );
+    bLoginConfirmed = sSignedInText && sSignedInText.includes('Signed in as ' + CREDS.username);
+
+    if (bLoginConfirmed) {
+      console.log('login succeeded. proceeding to scrape.');
+      return Promise.resolve(true);
+    } else {
+      console.log('login failed. terminating process');
+      return Promise.resolve(false);
+    }
+  }
 };
 
 async function main() {
   if (process.env.DEBUG) {
     debugger;
   }
-  scrapeUtils.exec({ fpEvaluate, fpLogin, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
+  scrapeUtils.exec({ fpEvaluate, fpbLogin, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
 }
 
 main();
