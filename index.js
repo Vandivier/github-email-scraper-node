@@ -53,4 +53,11 @@ fEvaluate = async oInputRecord => {
   });
 };
 
-scrapeUtils.exec({ fEvaluate, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
+async function main() {
+  if (process.env.DEBUG) {
+    debugger;
+  }
+  scrapeUtils.exec({ fEvaluate, fsGetUrlToScrapeByInputRecord, oSourceMap, oTitleLine, sUniqueKey });
+}
+
+main();

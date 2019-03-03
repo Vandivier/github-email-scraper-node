@@ -4,6 +4,8 @@
   "description": "specify region search strings, get Github user email addresses. In Node.",
   "main": "index.js",
   "scripts": {
+    "debug": "export DEBUG=true&&export SUBSAMPLE=3&&node --inspect-brk index",
+    "debug-windows": "set DEBUG=true&&set SUBSAMPLE=3&&node --inspect-brk index",
     "start": "node index",
     "subsample": "export SUBSAMPLE=3&& npm run start",
     "subsample-windows": "set SUBSAMPLE=3&& npm run start",
