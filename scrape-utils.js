@@ -154,7 +154,7 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
 
   if (oDereferencedResult.oNextInputRecord && fbIsValidUrlToScrape(oDereferencedResult.oNextInputRecord.sScrapedUrl)) {
     // deceptively simple, dangerously recursive
-    await fpHandleData(oMergedRecord.oNextInputRecord);
+    await fpHandleData(oDereferencedResult.oNextInputRecord);
   }
 
   return oDereferencedResult;
