@@ -24,9 +24,11 @@ const oTitleLine = {
 sUniqueKey = 'sEmail';
 
 function fsGetUrlToScrapeByInputRecord(oInputRecord) {
+  // sScrapedUrl will be already provided if it's coming recursively
   return (
-    oInputRecord.sLocationMatched &&
-    'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRecord.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l='
+    oInputRecord.sScrapedUrl ||
+    (oInputRecord.sLocationMatched &&
+      'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRecord.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l=')
   );
 }
 
@@ -65,9 +67,10 @@ fpEvaluate = async oInputRecord => {
 
     return {
       arrpoOutputRows,
-      oNextInputRecord: Object.assign({}, oInputRecord, {
+      oNextInputRecord: {
+        sLocationMatched: oInputRecord.sLocationMatched,
         sScrapedUrl: document.querySelector('.next_page').href,
-      }),
+      },
     };
   }
 };

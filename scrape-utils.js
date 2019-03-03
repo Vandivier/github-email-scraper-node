@@ -106,13 +106,11 @@ async function fpHandleData(oInputRecord) {
     _oInputRecord.sScrapedUrl = oServiceThis.fsGetUrlToScrapeByInputRecord(_oInputRecord);
 
     if (fbIsValidUrlToScrape(_oInputRecord.sScrapedUrl)) {
-      // one input record produces an array of output records
-      let arroResult = oCache[_oInputRecord.sScrapedUrl];
-      if (!arroResult) arroResult = await oServiceThis.fpbSkipInput(_oInputRecord);
-      if (!arroResult) arroResult = await oServiceThis.fpScrapeInputWrapper(_oInputRecord);
-      if (!arroResult) {
-        console.log('error: unexpectedly did not find fpHandleData.arroResult for input record #' + iCurrentInputRecord);
-        arroResult = [];
+      let oResult = await oServiceThis.fpbSkipInput(_oInputRecord);
+      if (!oResult) oResult = await oServiceThis.fpScrapeInputWrapper(_oInputRecord);
+      if (!oResult) {
+        console.log('error: unexpectedly did not find fpHandleData.oResult for input record #' + iCurrentInputRecord);
+        oResult = {};
       }
     } else {
       console.log('error: bad value for _oInputRecord.sScrapedUrl in fpHandleData for input record #' + iCurrentInputRecord);
@@ -145,10 +143,19 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
   await page.content();
   page.on('console', oServiceThis.fOnScraperLog); // ref: https://stackoverflow.com/a/47460782/3931488
 
-  const oResult = await page.evaluate(oServiceThis.fpEvaluate, oInputRecord).catch(function(error) {
-    console.log('error scraping record: ', oInputRecord, error);
-    return { sOutputFileErrorColumn: 'error' };
-  });
+  let oResult = oCache[oInputRecord.sScrapedUrl];
+  if (!oResult) {
+    oResult = await page
+      .evaluate(oServiceThis.fpEvaluate, oInputRecord)
+      .catch(function(error) {
+        console.log('error scraping record: ', oInputRecord, error);
+        return { sOutputFileErrorColumn: 'error' };
+      })
+      .catch(err => {
+        console.log('error while evaluting', err, oInputRecord);
+        return {};
+      });
+  }
 
   console.log('result: ', oResult);
   const oDereferencedResult = JSON.parse(JSON.stringify(oResult));
@@ -158,6 +165,7 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
   oCache[oInputRecord.sScrapedUrl] = oDereferencedResult;
 
   if (Array.isArray(oDereferencedResult.arrpoOutputRows) && oDereferencedResult.arrpoOutputRows.length) {
+    // one input record produces an array of output records
     oDereferencedResult.arrpoOutputRows.forEach(fsRecordToCsvLine);
   }
 
