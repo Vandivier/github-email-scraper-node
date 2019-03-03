@@ -46,7 +46,6 @@ fpEvaluate = async oInputRecord => {
   return oResult;
 
   function fInnerScrapeRecord(oInputRecord) {
-    /*
     const arrpoOutputRow = [...document.body.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
       const $user = $email.parentElement; // .parentElement.parentElement;
 
@@ -59,25 +58,47 @@ fpEvaluate = async oInputRecord => {
         sScrapedUrl: oInputRecord.sScrapedUrl,
       };
     });
-    */
 
-    //return arrpoOutputRow;
+    return arrpoOutputRow;
     return [...document.body.querySelectorAll('.user-list-item [href*="@"]')];
   }
 };
 
 // ref: https://github.com/emadehsan/thal
 fpLogin = async page => {
+  let bLogoutResolved = false;
   const USERNAME_SELECTOR = '#login_field';
   const PASSWORD_SELECTOR = '#password';
   const BUTTON_SELECTOR = 'input[type=submit][name=commit]';
   const BUTTON_LOGOUT_SELECTOR = 'input[value="Sign out"]';
 
   await page.goto('https://github.com/logout'); // in case browser persisted an old session
-  await page.click(BUTTON_LOGOUT_SELECTOR);
-  await page.waitForNavigation();
   await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
-  console.log('logged out of old session');
+  const bSignoutButtonExists = await page.evaluate(() => document.querySelector('input[value="Sign out"]') !== null);
+
+  if (bSignoutButtonExists) {
+    // ref: https://github.com/GoogleChrome/puppeteer/issues/1412#issuecomment-402725036
+    const navigationPromise = page.waitForNavigation().then(() => {
+      !bLogoutResolved && console.log('confirmed logged out of old session');
+    });
+
+    const timeBasedPromise = new Promise(resolve => {
+      setTimeout(() => {
+        !bLogoutResolved && console.log('log out confirmation is taking a while, proceeding to login without logout confirmation');
+        resolve();
+      }, 5000);
+    });
+
+    await page.click(BUTTON_LOGOUT_SELECTOR);
+    console.log('sign out button found and clicked');
+
+    await Promise.race([navigationPromise, timeBasedPromise]);
+    bLogoutResolved = true;
+
+    await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
+  } else {
+    console.log('could not find sign out button. proceeding to log in.');
+  }
 
   await page.goto('https://github.com/login');
   await page.click(USERNAME_SELECTOR);
