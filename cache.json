@@ -1,5 +1,18 @@
 {
-    "undefined": [{
+    "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l=": [{
+        "sEmail": "roy@binux.me"
+    }, {
+        "sEmail": "nunemaker@gmail.com"
+    }, {
+        "sEmail": "mgong@microsoft.com"
+    }, {
+        "sEmail": "madoka.madoka@microsoft.com"
+    }, {
+        "sEmail": "linux_china@hotmail.com"
+    }, {
+        "sEmail": "wu.sheng@foxmail.com"
+    }],
+    "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22united states%22&type=Users&ref=advsearch&l=&l=": [{
         "sEmail": "jeffz@live.com"
     }, {
         "sEmail": "david@davidwalsh.name"

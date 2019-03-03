@@ -150,7 +150,7 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
 
   await page.close();
 
-  oCache[oInputRecord.sId] = oDereferencedResult;
+  oCache[oInputRecord.sScrapedUrl] = oDereferencedResult;
   fsRecordToCsvLine(oDereferencedResult);
 
   if (oDereferencedResult.oNextInputRecord) {
