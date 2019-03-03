@@ -51,16 +51,17 @@ fpEvaluate = async oInputRecord => {
 
       return {
         sEmail: $email.textContent,
+        /*
         sGithubUrl: $user.querySelector('a').href,
         sGithubUsername: $user.querySelector('a').text,
         sLocationMatched: oInputRecord.sLocationMatched,
         sName: $user.querySelector('div.d-block').textContent,
         sScrapedUrl: oInputRecord.sScrapedUrl,
+        */
       };
     });
 
     return arrpoOutputRow;
-    return [...document.body.querySelectorAll('.user-list-item [href*="@"]')];
   }
 };
 
@@ -106,6 +107,9 @@ fpLogin = async page => {
   await page.click(PASSWORD_SELECTOR);
   await page.keyboard.type(CREDS.password);
   await page.click(BUTTON_SELECTOR);
+
+  console.log('log in form found, filled, and submitted');
+
   await page.waitForNavigation();
   await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
 

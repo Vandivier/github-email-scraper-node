@@ -1,4 +1,5 @@
 # github-email-scraper-node
+
 specify region search strings, get Github user email addresses. In Node.
 
 When you `npm start`, this project will begin executing parallel Github location searches.
@@ -9,6 +10,8 @@ If you `node scrape mylocation` then the scraper will search mylocation then sto
 
 If you `node scrape mylocation 10` then the scraper will scrape a maximum of 10 pages.
 
+NOTE: actually alot of this readme is a lie rn lol. currently the scraper does not run multiple scrapes in parallel.
+
 The more specific commands are useful if you are nervous about something crashing, and then you might have to start all over.
 
 Results are written into `cached.json`. This file helps us in a few ways:
@@ -18,7 +21,7 @@ Results are written into `cached.json`. This file helps us in a few ways:
 2. This file ensures uniqueness of scraped profiles, using the profile url as a unique key.
 
 3. If you re-run the scraper later then you can skip all the profiles you already know about.
-    1. Note: If you want to bust the cache then delete the json file.
+   1. Note: If you want to bust the cache then delete the json file.
 
 If you `node output` then the contents of `cached.json` will be written into `output.csv`.
 
