@@ -27,23 +27,6 @@ function fsGetUrlToScrapeByInputRecord(oInputRecord) {
   );
 }
 
-async function fpInnerScrapeRecord(oInputRecord) {
-  const arrpoOutputRow = [...document.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
-    const $user = $email.parentElement.parentElement.parentElement;
-
-    return {
-      sEmail: $email.textContent,
-      sGithubUrl: $user.querySelector('a').href,
-      sGithubUsername: $user.querySelector('a').text,
-      sLocationMatched: oInputRecord.sLocationMatched,
-      sName: $user.querySelector('div.d-block').textContent,
-      sScrapedUrl: oInputRecord.sScrapedUrl,
-    };
-  });
-
-  return Promise.resolve(arrpoOutputRow);
-}
-
 fEvaluate = async oInputRecord => {
   console.log('scraping: ' + window.location.href);
   await new Promise(resolve => setTimeout(resolve, 500));
@@ -51,6 +34,23 @@ fEvaluate = async oInputRecord => {
     console.log('fpInnerScrapeRecord err: ', err);
     return err;
   });
+
+  async function fpInnerScrapeRecord(oInputRecord) {
+    const arrpoOutputRow = [...document.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
+      const $user = $email.parentElement.parentElement.parentElement;
+
+      return {
+        sEmail: $email.textContent,
+        sGithubUrl: $user.querySelector('a').href,
+        sGithubUsername: $user.querySelector('a').text,
+        sLocationMatched: oInputRecord.sLocationMatched,
+        sName: $user.querySelector('div.d-block').textContent,
+        sScrapedUrl: oInputRecord.sScrapedUrl,
+      };
+    });
+
+    return Promise.resolve(arrpoOutputRow);
+  }
 };
 
 async function main() {

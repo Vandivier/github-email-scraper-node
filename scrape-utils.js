@@ -43,7 +43,6 @@ async function main() {
   let arrsInputRows;
 
   fsRecordToCsvLine(oServiceThis.oTitleLine);
-  await utils.fpWait(5000); // only needed to give debugger time to attach
   sInputCsv = await fpReadFile(sInputFilePath, 'utf8');
   arrsInputRows = sInputCsv.split(EOL).filter(sLine => sLine); // drop title line and empty trailing lines
 
@@ -67,9 +66,7 @@ async function main() {
   await utils.forEachReverseAsyncPhased(arrsInputRows, async function(_sInputRecord) {
     // TODO: automatically detect title line and expand object using oTitleLine
     const arrsCells = _sInputRecord.split(',');
-    const arrsInputColumnTitles = Object(oServiceThis.oSourceMap).keys || [];
-
-    console.log('arrsInputColumnTitles', arrsInputColumnTitles);
+    const arrsInputColumnTitles = Object.keys(oServiceThis.oSourceMap) || [];
 
     const oRecordFromSource = arrsInputColumnTitles.reduce((oAcc, sKey) => {
       const iValueIndex = oServiceThis.oSourceMap[sKey];
@@ -135,17 +132,15 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
   await page.content();
   page.on('console', oServiceThis.fOnScraperLog); // ref: https://stackoverflow.com/a/47460782/3931488
 
-  const oResult = await page
-    .evaluate(_oInputRecord => oServiceThis.fEvaluate, oInputRecord)
-    .catch(function(error) {
-      const sOutputFileErrorColumn = oInputRecord[sUniqueKey];
-      console.log('error scraping record: ', oInputRecord, error);
-      return { sOutputFileErrorColumn: 'error' };
-    });
+  const oResult = await page.evaluate(oServiceThis.fEvaluate, oInputRecord).catch(function(error) {
+    const sOutputFileErrorColumn = oInputRecord[sUniqueKey];
+    console.log('error scraping record: ', oInputRecord, error);
+    return { sOutputFileErrorColumn: 'error' };
+  });
 
   const oDereferencedResult = JSON.parse(JSON.stringify(oResult));
 
-  await _page.close();
+  await page.close();
 
   oCache[oInputRecord.sId] = oDereferencedResult;
   fsRecordToCsvLine(oDereferencedResult);
