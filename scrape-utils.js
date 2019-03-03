@@ -61,7 +61,7 @@ async function main() {
   }
 
   console.log('early count, iTotalInputRecords = ' + iTotalInputRecords);
-  oServiceThis.browser = await puppeteer.launch();
+  oServiceThis.browser = process.env.DEBUG ? await puppeteer.launch({ headless: false }) : await puppeteer.launch();
 
   if (oServiceThis.fpLogin) {
     // TODO: do i need to be logged into scrape page or just scrape browser?

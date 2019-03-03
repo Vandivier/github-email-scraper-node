@@ -46,6 +46,7 @@ fpEvaluate = async oInputRecord => {
   return oResult;
 
   function fInnerScrapeRecord(oInputRecord) {
+    /*
     const arrpoOutputRow = [...document.body.querySelectorAll('.user-list-item [href*="@"]')].map($email => {
       const $user = $email.parentElement; // .parentElement.parentElement;
 
@@ -58,8 +59,10 @@ fpEvaluate = async oInputRecord => {
         sScrapedUrl: oInputRecord.sScrapedUrl,
       };
     });
+    */
 
-    return arrpoOutputRow;
+    //return arrpoOutputRow;
+    return [...document.body.querySelectorAll('.user-list-item [href*="@"]')];
   }
 };
 
@@ -68,6 +71,13 @@ fpLogin = async page => {
   const USERNAME_SELECTOR = '#login_field';
   const PASSWORD_SELECTOR = '#password';
   const BUTTON_SELECTOR = 'input[type=submit][name=commit]';
+  const BUTTON_LOGOUT_SELECTOR = 'input[value="Sign out"]';
+
+  await page.goto('https://github.com/logout'); // in case browser persisted an old session
+  await page.click(BUTTON_LOGOUT_SELECTOR);
+  await page.waitForNavigation();
+  await page.waitFor(2 * 1000); // give it some extra time bc idk to be safe i guess
+  console.log('logged out of old session');
 
   await page.goto('https://github.com/login');
   await page.click(USERNAME_SELECTOR);
