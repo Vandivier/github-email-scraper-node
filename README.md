@@ -26,3 +26,15 @@ Results are written into `cached.json`. This file helps us in a few ways:
 If you `node output` then the contents of `cached.json` will be written into `output.csv`.
 
 Be very careful if you plan to blast an email to the scraped email list. Consider using a cleansing service and emailing them individually instead of blasting them.
+
+## TODO
+
+1. key oCache of both sScrapedUrl and sUniqueKey;
+
+2. deal with invalid commas and quotes interior to cell values. Eg [Brody](https://github.com/Ryan-B-W).
+
+3. scrape for each Github sorting option, and include which sorting option an entry is initially obtained from
+
+   1. maybe collect all sorting options under which result appears
+
+   2. maybe find some way to access unobserved records (rn I can only get ~7k / 50k for location "united states")
