@@ -14,8 +14,8 @@ const oSourceMap = {
 
 const oTitleLine = {
   sEmail: 'Email Address',
-  sGithubUrl: 'Entry ID',
-  sGithubUsername: 'Entry ID',
+  sGithubUrl: 'Github URL',
+  sGithubUsername: 'Github Username',
   sLocationMatched: 'Location',
   sName: 'Name',
   sScrapedUrl: 'Scraped Url',
@@ -37,6 +37,7 @@ fpEvaluate = async oInputRecord => {
 
   console.log('scraping: ' + window.location.href);
   await new Promise(resolve => setTimeout(resolve, 500)); // let dynamic content load
+  await new Promise(resolve => setTimeout(resolve, Math.ceil((Math.random() * 10 + 2) * 1000))); // Throttling. Pause randomly between 2 and 12 seconds.
 
   try {
     oResult = fInnerScrapeRecord(oInputRecord);

@@ -1,1 +1,1359 @@
-{}
+{
+    "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l=": {
+        "arrpoOutputRows": [{
+            "sEmail": "roy@binux.me",
+            "sGithubUrl": "https://github.com/binux",
+            "sGithubUsername": "binux",
+            "sLocationMatched": "us",
+            "sName": "Roy Binux",
+            "sScrapedUrl": "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l="
+        }, {
+            "sEmail": "nunemaker@gmail.com",
+            "sGithubUrl": "https://github.com/jnunemaker",
+            "sGithubUsername": "jnunemaker",
+            "sLocationMatched": "us",
+            "sName": "John Nunemaker",
+            "sScrapedUrl": "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l="
+        }, {
+            "sEmail": "mgong@microsoft.com",
+            "sGithubUrl": "https://github.com/gongminmin",
+            "sGithubUsername": "gongminmin",
+            "sLocationMatched": "us",
+            "sName": "Minmin Gong",
+            "sScrapedUrl": "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l="
+        }, {
+            "sEmail": "madoka.madoka@microsoft.com",
+            "sGithubUrl": "https://github.com/chomado",
+            "sGithubUsername": "chomado",
+            "sLocationMatched": "us",
+            "sName": "ちょまど | Madoka Chiyoda",
+            "sScrapedUrl": "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l="
+        }, {
+            "sEmail": "linux_china@hotmail.com",
+            "sGithubUrl": "https://github.com/linux-china",
+            "sGithubUsername": "linux-china",
+            "sLocationMatched": "us",
+            "sName": "Jacky Chan",
+            "sScrapedUrl": "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l="
+        }, {
+            "sEmail": "wu.sheng@foxmail.com",
+            "sGithubUrl": "https://github.com/wu-sheng",
+            "sGithubUsername": "wu-sheng",
+            "sLocationMatched": "us",
+            "sName": "吴晟 Wu Sheng",
+            "sScrapedUrl": "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22us%22&type=Users&ref=advsearch&l=&l="
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "tbosch1009@gmail.com",
+            "sGithubUrl": "https://github.com/tbosch",
+            "sGithubUsername": "tbosch",
+            "sLocationMatched": "us",
+            "sName": "Tobias Bosch",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "m@marcgrabanski.com",
+            "sGithubUrl": "https://github.com/1Marc",
+            "sGithubUsername": "1Marc",
+            "sLocationMatched": "us",
+            "sName": "Marc Grabanski",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "tj.vantoll@gmail.com",
+            "sGithubUrl": "https://github.com/tjvantoll",
+            "sGithubUsername": "tjvantoll",
+            "sLocationMatched": "us",
+            "sName": "TJ VanToll",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mbrubeck@limpet.net",
+            "sGithubUrl": "https://github.com/mbrubeck",
+            "sGithubUsername": "mbrubeck",
+            "sLocationMatched": "us",
+            "sName": "Matt Brubeck",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "fafhrd91@gmail.com",
+            "sGithubUrl": "https://github.com/fafhrd91",
+            "sGithubUsername": "fafhrd91",
+            "sLocationMatched": "us",
+            "sName": "Nikolay Kim",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "public-apollonian@outlook.com",
+            "sGithubUrl": "https://github.com/ApolloZhu",
+            "sGithubUsername": "ApolloZhu",
+            "sLocationMatched": "us",
+            "sName": "Zhiyu Zhu/朱智语",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "bmc@clapper.org",
+            "sGithubUrl": "https://github.com/bmc",
+            "sGithubUsername": "bmc",
+            "sLocationMatched": "us",
+            "sName": "Brian Clapper",
+            "sScrapedUrl": "https://github.com/search?l=&p=2&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "bxbian951122@gmail.com",
+            "sGithubUrl": "https://github.com/rijn",
+            "sGithubUsername": "rijn",
+            "sLocationMatched": "us",
+            "sName": "Rijn Bian",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "hello@juliaelman.com",
+            "sGithubUrl": "https://github.com/juliaelman",
+            "sGithubUsername": "juliaelman",
+            "sLocationMatched": "us",
+            "sName": "Julia Elman",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "r@32k.io",
+            "sGithubUrl": "https://github.com/ryandotsmith",
+            "sGithubUsername": "ryandotsmith",
+            "sLocationMatched": "us",
+            "sName": "Ryan Smith",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "harald@digitarald.com",
+            "sGithubUrl": "https://github.com/digitarald",
+            "sGithubUsername": "digitarald",
+            "sLocationMatched": "us",
+            "sName": "Harald Kirschner",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "achillesrasquinha@gmail.com",
+            "sGithubUrl": "https://github.com/achillesrasquinha",
+            "sGithubUsername": "achillesrasquinha",
+            "sLocationMatched": "us",
+            "sName": "Achilles Rasquinha",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "max@max.wtf",
+            "sGithubUrl": "https://github.com/max",
+            "sGithubUsername": "max",
+            "sLocationMatched": "us",
+            "sName": "Max Schoening",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "huangkh19951228@gmail.com",
+            "sGithubUrl": "https://github.com/khuangaf",
+            "sGithubUsername": "khuangaf",
+            "sLocationMatched": "us",
+            "sName": "Kung-hsiang, Huang (Steeve)",
+            "sScrapedUrl": "https://github.com/search?l=&p=3&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "evan@ripple.com",
+            "sGithubUrl": "https://github.com/emschwartz",
+            "sGithubUsername": "emschwartz",
+            "sLocationMatched": "us",
+            "sName": "Evan Schwartz",
+            "sScrapedUrl": "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "justin.xin.liu@gmail.com",
+            "sGithubUrl": "https://github.com/JustinXinLiu",
+            "sGithubUsername": "JustinXinLiu",
+            "sLocationMatched": "us",
+            "sName": "Justin Liu",
+            "sScrapedUrl": "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "brento@brentozar.com",
+            "sGithubUrl": "https://github.com/BrentOzar",
+            "sGithubUsername": "BrentOzar",
+            "sLocationMatched": "us",
+            "sName": "Brent Ozar",
+            "sScrapedUrl": "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "atwoodm@amazon.com",
+            "sGithubUrl": "https://github.com/MarkAtwood",
+            "sGithubUsername": "MarkAtwood",
+            "sLocationMatched": "us",
+            "sName": "Mark Atwood",
+            "sScrapedUrl": "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "heangela.arts@gmail.com",
+            "sGithubUrl": "https://github.com/zephyo",
+            "sGithubUsername": "zephyo",
+            "sLocationMatched": "us",
+            "sName": "Angela He",
+            "sScrapedUrl": "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "joel@joelparkerhenderson.com",
+            "sGithubUrl": "https://github.com/joelparkerhenderson",
+            "sGithubUsername": "joelparkerhenderson",
+            "sLocationMatched": "us",
+            "sName": "Joel Parker Henderson",
+            "sScrapedUrl": "https://github.com/search?l=&p=4&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=5&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=5&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "bspkrs@gmail.com",
+            "sGithubUrl": "https://github.com/bspkrs",
+            "sGithubUsername": "bspkrs",
+            "sLocationMatched": "us",
+            "sName": "bspkrs",
+            "sScrapedUrl": "https://github.com/search?l=&p=5&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "david.s.mittman@jpl.nasa.gov",
+            "sGithubUrl": "https://github.com/dmittman",
+            "sGithubUsername": "dmittman",
+            "sLocationMatched": "us",
+            "sName": "David Mittman",
+            "sScrapedUrl": "https://github.com/search?l=&p=5&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "alex@alexsoto.me",
+            "sGithubUrl": "https://github.com/dalexsoto",
+            "sGithubUsername": "dalexsoto",
+            "sLocationMatched": "us",
+            "sName": "Alex Soto",
+            "sScrapedUrl": "https://github.com/search?l=&p=5&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "mr.pppoe@gmail.com",
+            "sGithubUrl": "https://github.com/pppoe",
+            "sGithubUsername": "pppoe",
+            "sLocationMatched": "us",
+            "sName": "Haoxiang Li",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "shivamvats.iitkgp@gmail.com",
+            "sGithubUrl": "https://github.com/shivamvats",
+            "sGithubUsername": "shivamvats",
+            "sLocationMatched": "us",
+            "sName": "Shivam Vats",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mjumper@apache.org",
+            "sGithubUrl": "https://github.com/mike-jumper",
+            "sGithubUsername": "mike-jumper",
+            "sLocationMatched": "us",
+            "sName": "Mike Jumper",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "hi@jacquestardie.org",
+            "sGithubUrl": "https://github.com/jacquestardie",
+            "sGithubUsername": "jacquestardie",
+            "sLocationMatched": "us",
+            "sName": "jqtrde",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "vueringschristian@gmail.com",
+            "sGithubUrl": "https://github.com/christianvuerings",
+            "sGithubUsername": "christianvuerings",
+            "sLocationMatched": "us",
+            "sName": "Christian Vuerings",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "tosman9000@yahoo.com",
+            "sGithubUrl": "https://github.com/TosinAF",
+            "sGithubUsername": "TosinAF",
+            "sLocationMatched": "us",
+            "sName": "Tosin Afolabi",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "bruinxiongmac@gmail.com",
+            "sGithubUrl": "https://github.com/bruinxiong",
+            "sGithubUsername": "bruinxiong",
+            "sLocationMatched": "us",
+            "sName": "Xiong Lin",
+            "sScrapedUrl": "https://github.com/search?l=&p=6&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=7&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=7&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "ThePolywellGuy@gmail.com",
+            "sGithubUrl": "https://github.com/ThePolywellGuy",
+            "sGithubUsername": "ThePolywellGuy",
+            "sLocationMatched": "us",
+            "sName": "The Polywell Guy",
+            "sScrapedUrl": "https://github.com/search?l=&p=7&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "xieyaxiongfly@gmail.com",
+            "sGithubUrl": "https://github.com/xieyaxiongfly",
+            "sGithubUsername": "xieyaxiongfly",
+            "sLocationMatched": "us",
+            "sName": "YaxiongXie",
+            "sScrapedUrl": "https://github.com/search?l=&p=7&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "codeofficer@gmail.com",
+            "sGithubUrl": "https://github.com/CodeOfficer",
+            "sGithubUsername": "CodeOfficer",
+            "sLocationMatched": "us",
+            "sName": "Russell Jones",
+            "sScrapedUrl": "https://github.com/search?l=&p=7&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "kevin@blockchain.info",
+            "sGithubUrl": "https://github.com/KMHouk",
+            "sGithubUsername": "KMHouk",
+            "sLocationMatched": "us",
+            "sName": "Kevin Houk",
+            "sScrapedUrl": "https://github.com/search?l=&p=7&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "me@johnmurray.io",
+            "sGithubUrl": "https://github.com/JohnMurray",
+            "sGithubUsername": "JohnMurray",
+            "sLocationMatched": "us",
+            "sName": "John Murray",
+            "sScrapedUrl": "https://github.com/search?l=&p=7&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "artem@volkhin.com",
+            "sGithubUrl": "https://github.com/volkhin",
+            "sGithubUsername": "volkhin",
+            "sLocationMatched": "us",
+            "sName": "Artem Volkhin",
+            "sScrapedUrl": "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "korshenk@adobe.com",
+            "sGithubUrl": "https://github.com/okorshenko",
+            "sGithubUsername": "okorshenko",
+            "sLocationMatched": "us",
+            "sName": "Oleksii Korshenko",
+            "sScrapedUrl": "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "fernand.galiana@gmail.com",
+            "sGithubUrl": "https://github.com/derailed",
+            "sGithubUsername": "derailed",
+            "sLocationMatched": "us",
+            "sName": "Fernand Galiana",
+            "sScrapedUrl": "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "ndw@nwalsh.com",
+            "sGithubUrl": "https://github.com/ndw",
+            "sGithubUsername": "ndw",
+            "sLocationMatched": "us",
+            "sName": "Norman Walsh",
+            "sScrapedUrl": "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "anh.ng8@gmail.com",
+            "sGithubUrl": "https://github.com/anguyen8",
+            "sGithubUsername": "anguyen8",
+            "sLocationMatched": "us",
+            "sName": "Anh M. Nguyen",
+            "sScrapedUrl": "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "wentaozhu1991@gmail.com",
+            "sGithubUrl": "https://github.com/wentaozhu",
+            "sGithubUsername": "wentaozhu",
+            "sLocationMatched": "us",
+            "sName": "Wentao Zhu",
+            "sScrapedUrl": "https://github.com/search?l=&p=8&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "g.rajukoushik@gmail.com",
+            "sGithubUrl": "https://github.com/RajuKoushik",
+            "sGithubUsername": "RajuKoushik",
+            "sLocationMatched": "us",
+            "sName": "RajuKoushik",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "jonathan@rainier.tech",
+            "sGithubUrl": "https://github.com/Pwnoz0r",
+            "sGithubUsername": "Pwnoz0r",
+            "sLocationMatched": "us",
+            "sName": "Jonathan Rainier",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mac@macasaurus.com",
+            "sGithubUrl": "https://github.com/macb",
+            "sGithubUsername": "macb",
+            "sLocationMatched": "us",
+            "sName": "Mac Browning",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "me@allejo.io",
+            "sGithubUrl": "https://github.com/allejo",
+            "sGithubUsername": "allejo",
+            "sLocationMatched": "us",
+            "sName": "Vladimir Jimenez",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "jeffinbao@gmail.com",
+            "sGithubUrl": "https://github.com/JeffinBao",
+            "sGithubUsername": "JeffinBao",
+            "sLocationMatched": "us",
+            "sName": "Jeffin.Bao",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "anthm@freeswitch.org",
+            "sGithubUrl": "https://github.com/anthmFS",
+            "sGithubUsername": "anthmFS",
+            "sLocationMatched": "us",
+            "sName": "Anthony Minessale",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "league@contrapunctus.net",
+            "sGithubUrl": "https://github.com/league",
+            "sGithubUsername": "league",
+            "sLocationMatched": "us",
+            "sName": "Christopher League",
+            "sScrapedUrl": "https://github.com/search?l=&p=9&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "xljroy@gmail.com",
+            "sGithubUrl": "https://github.com/royxue",
+            "sGithubUsername": "royxue",
+            "sLocationMatched": "us",
+            "sName": "Roy Xue",
+            "sScrapedUrl": "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "eldawy@cs.umn.edu",
+            "sGithubUrl": "https://github.com/aseldawy",
+            "sGithubUsername": "aseldawy",
+            "sLocationMatched": "us",
+            "sName": "Ahmed Eldawy",
+            "sScrapedUrl": "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "scott@propertypreswizard.com",
+            "sGithubUrl": "https://github.com/ssanders",
+            "sGithubUsername": "ssanders",
+            "sLocationMatched": "us",
+            "sName": "Scott M. Sanders",
+            "sScrapedUrl": "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "jacquelinehoman7@gmail.com",
+            "sGithubUrl": "https://github.com/jacqueline-homan",
+            "sGithubUsername": "jacqueline-homan",
+            "sLocationMatched": "us",
+            "sName": "Jacqueline S. Homan",
+            "sScrapedUrl": "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "sandro@hawke.org",
+            "sGithubUrl": "https://github.com/sandhawke",
+            "sGithubUsername": "sandhawke",
+            "sLocationMatched": "us",
+            "sName": "Sandro Hawke",
+            "sScrapedUrl": "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "schtoo@schtoo.com",
+            "sGithubUrl": "https://github.com/cgross",
+            "sGithubUsername": "cgross",
+            "sLocationMatched": "us",
+            "sName": "Chris Gross",
+            "sScrapedUrl": "https://github.com/search?l=&p=10&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "hassy@logos.t.u-tokyo.ac.jp",
+            "sGithubUrl": "https://github.com/hassyGo",
+            "sGithubUsername": "hassyGo",
+            "sLocationMatched": "us",
+            "sName": "Kazuma Hashimoto",
+            "sScrapedUrl": "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "skong2@uci.edu",
+            "sGithubUrl": "https://github.com/aimerykong",
+            "sGithubUsername": "aimerykong",
+            "sLocationMatched": "us",
+            "sName": "Shu Kong",
+            "sScrapedUrl": "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "w@bunny.rocks",
+            "sGithubUrl": "https://github.com/wecing",
+            "sGithubUsername": "wecing",
+            "sLocationMatched": "us",
+            "sName": "Chenguang Wang",
+            "sScrapedUrl": "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "rcddeveloper@icloud.com",
+            "sGithubUrl": "https://github.com/rcdilorenzo",
+            "sGithubUsername": "rcdilorenzo",
+            "sLocationMatched": "us",
+            "sName": "Christian Di Lorenzo",
+            "sScrapedUrl": "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "t+github@stromberg.org",
+            "sGithubUrl": "https://github.com/tstromberg",
+            "sGithubUsername": "tstromberg",
+            "sLocationMatched": "us",
+            "sName": "Thomas Strömberg",
+            "sScrapedUrl": "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "cam@cameronspear.com",
+            "sGithubUrl": "https://github.com/CWSpear",
+            "sGithubUsername": "CWSpear",
+            "sLocationMatched": "us",
+            "sName": "Cameron Spear",
+            "sScrapedUrl": "https://github.com/search?l=&p=11&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=12&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=12&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "makis.tracend@gmail.com",
+            "sGithubUrl": "https://github.com/tracend",
+            "sGithubUsername": "tracend",
+            "sLocationMatched": "us",
+            "sName": "✌ Makis Tracend",
+            "sScrapedUrl": "https://github.com/search?l=&p=12&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "robert@arctic.tw",
+            "sGithubUrl": "https://github.com/robertabcd",
+            "sGithubUsername": "robertabcd",
+            "sLocationMatched": "us",
+            "sName": "Robert Wang",
+            "sScrapedUrl": "https://github.com/search?l=&p=12&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "pcorti@gmail.com",
+            "sGithubUrl": "https://github.com/capooti",
+            "sGithubUsername": "capooti",
+            "sLocationMatched": "us",
+            "sName": "Paolo Corti",
+            "sScrapedUrl": "https://github.com/search?l=&p=12&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "csmooreacm@acm.org",
+            "sGithubUrl": "https://github.com/csmoore",
+            "sGithubUsername": "csmoore",
+            "sLocationMatched": "us",
+            "sName": "Chris Moore",
+            "sScrapedUrl": "https://github.com/search?l=&p=12&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=13&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=13&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "jasonli2u@gmail.com",
+            "sGithubUrl": "https://github.com/lifedim",
+            "sGithubUsername": "lifedim",
+            "sLocationMatched": "us",
+            "sName": "Jason Li",
+            "sScrapedUrl": "https://github.com/search?l=&p=13&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "tks.ohishi@gmail.com",
+            "sGithubUrl": "https://github.com/tksohishi",
+            "sGithubUsername": "tksohishi",
+            "sLocationMatched": "us",
+            "sName": "Takeshi Ohishi",
+            "sScrapedUrl": "https://github.com/search?l=&p=13&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "dan.richert@gmail.com",
+            "sGithubUrl": "https://github.com/drichert",
+            "sGithubUsername": "drichert",
+            "sLocationMatched": "us",
+            "sName": "Dan Richert",
+            "sScrapedUrl": "https://github.com/search?l=&p=13&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "vmatveev@citrine.cc",
+            "sGithubUrl": "https://github.com/netvl",
+            "sGithubUsername": "netvl",
+            "sLocationMatched": "us",
+            "sName": "Vladimir Matveev",
+            "sScrapedUrl": "https://github.com/search?l=&p=13&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=14&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=14&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "git@abiusx.com",
+            "sGithubUrl": "https://github.com/abiusx",
+            "sGithubUsername": "abiusx",
+            "sLocationMatched": "us",
+            "sName": "AbiusX",
+            "sScrapedUrl": "https://github.com/search?l=&p=14&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "rma4ok@gmail.com",
+            "sGithubUrl": "https://github.com/rma4ok",
+            "sGithubUsername": "rma4ok",
+            "sLocationMatched": "us",
+            "sName": "Kiryl Yermakou",
+            "sScrapedUrl": "https://github.com/search?l=&p=14&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "hdp@cpan.org",
+            "sGithubUrl": "https://github.com/hdp",
+            "sGithubUsername": "hdp",
+            "sLocationMatched": "us",
+            "sName": "Hans Dieter Pearcey",
+            "sScrapedUrl": "https://github.com/search?l=&p=14&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "johnny.r.reina@gmail.com",
+            "sGithubUrl": "https://github.com/jreina",
+            "sGithubUsername": "jreina",
+            "sLocationMatched": "us",
+            "sName": "Johnny Reina",
+            "sScrapedUrl": "https://github.com/search?l=&p=14&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "gon.gong.gone@gmail.com",
+            "sGithubUrl": "https://github.com/gong023",
+            "sGithubUsername": "gong023",
+            "sLocationMatched": "us",
+            "sName": "gong023",
+            "sScrapedUrl": "https://github.com/search?l=&p=14&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "zma4580@gmail.com",
+            "sGithubUrl": "https://github.com/zmallen",
+            "sGithubUsername": "zmallen",
+            "sLocationMatched": "us",
+            "sName": "Zack Allen",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "jeward@linkedin.com",
+            "sGithubUrl": "https://github.com/jesseward",
+            "sGithubUsername": "jesseward",
+            "sLocationMatched": "us",
+            "sName": "Jesse Ward",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "hyzwowtools@gmail.com",
+            "sGithubUrl": "https://github.com/finaldie",
+            "sGithubUsername": "finaldie",
+            "sLocationMatched": "us",
+            "sName": "Yuzhang Hu",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "yougmark94@gmail.com",
+            "sGithubUrl": "https://github.com/Yougmark",
+            "sGithubUsername": "Yougmark",
+            "sLocationMatched": "us",
+            "sName": "Ming Yang",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "robmarano@gmail.com",
+            "sGithubUrl": "https://github.com/robmarano",
+            "sGithubUsername": "robmarano",
+            "sLocationMatched": "us",
+            "sName": "Rob Marano",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "michael.heilemann@me.com",
+            "sGithubUrl": "https://github.com/Heilemann",
+            "sGithubUsername": "Heilemann",
+            "sLocationMatched": "us",
+            "sName": "Michael Heilemann",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mingsnu@gmail.com",
+            "sGithubUrl": "https://github.com/mingsnu",
+            "sGithubUsername": "mingsnu",
+            "sLocationMatched": "us",
+            "sName": "Weicheng Zhu",
+            "sScrapedUrl": "https://github.com/search?l=&p=15&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=16&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=16&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "wbvcos@gmail.com",
+            "sGithubUrl": "https://github.com/imkimchi",
+            "sGithubUsername": "imkimchi",
+            "sLocationMatched": "us",
+            "sName": "Philip YoonShin",
+            "sScrapedUrl": "https://github.com/search?l=&p=16&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "jeffrey.l.williams@gmail.com",
+            "sGithubUrl": "https://github.com/hegemonic",
+            "sGithubUsername": "hegemonic",
+            "sLocationMatched": "us",
+            "sName": "Jeff Williams",
+            "sScrapedUrl": "https://github.com/search?l=&p=16&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "cschleiden@live.de",
+            "sGithubUrl": "https://github.com/cschleiden",
+            "sGithubUsername": "cschleiden",
+            "sLocationMatched": "us",
+            "sName": "Christopher Schleiden",
+            "sScrapedUrl": "https://github.com/search?l=&p=16&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "valentine.zavgorodnev@gmail.com",
+            "sGithubUrl": "https://github.com/valzav",
+            "sGithubUsername": "valzav",
+            "sLocationMatched": "us",
+            "sName": "Valentine Zavgorodnev",
+            "sScrapedUrl": "https://github.com/search?l=&p=16&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "firdaus@xcube.io",
+            "sGithubUrl": "https://github.com/firdausramlan",
+            "sGithubUsername": "firdausramlan",
+            "sLocationMatched": "us",
+            "sName": "Firdaus Ramlan",
+            "sScrapedUrl": "https://github.com/search?l=&p=16&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "yinc13@mails.tsinghua.edu.cn",
+            "sGithubUrl": "https://github.com/yinchengtsinghua",
+            "sGithubUsername": "yinchengtsinghua",
+            "sLocationMatched": "us",
+            "sName": "Yincheng-Tsinghua",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "all.along.the.watchtower2001+github@gmail.com",
+            "sGithubUrl": "https://github.com/ross-spencer",
+            "sGithubUsername": "ross-spencer",
+            "sLocationMatched": "us",
+            "sName": "Ross Spencer",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "ungureanuvladvictor@gmail.com",
+            "sGithubUrl": "https://github.com/ungureanuvladvictor",
+            "sGithubUsername": "ungureanuvladvictor",
+            "sLocationMatched": "us",
+            "sName": "Vlad Ungureanu",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mobilinkd@gmail.com",
+            "sGithubUrl": "https://github.com/mobilinkd",
+            "sGithubUsername": "mobilinkd",
+            "sLocationMatched": "us",
+            "sName": "Mobilinkd LLC",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "will@coleda.com",
+            "sGithubUrl": "https://github.com/coke",
+            "sGithubUsername": "coke",
+            "sLocationMatched": "us",
+            "sName": "Will Coleda",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "cortex+from-github@brainonfire.net",
+            "sGithubUrl": "https://github.com/timmc",
+            "sGithubUsername": "timmc",
+            "sLocationMatched": "us",
+            "sName": "Tim McCormack",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "bodong.chen@gmail.com",
+            "sGithubUrl": "https://github.com/meefen",
+            "sGithubUsername": "meefen",
+            "sLocationMatched": "us",
+            "sName": "Bodong Chen",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "me@retroc.at",
+            "sGithubUrl": "https://github.com/medcat",
+            "sGithubUsername": "medcat",
+            "sLocationMatched": "us",
+            "sName": "Jeremy Rodi",
+            "sScrapedUrl": "https://github.com/search?l=&p=17&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "zongweiz@asu.edu",
+            "sGithubUrl": "https://github.com/MrGiovanni",
+            "sGithubUsername": "MrGiovanni",
+            "sLocationMatched": "us",
+            "sName": "Zongwei Zhou",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mav@ixsystems.com",
+            "sGithubUrl": "https://github.com/amotin",
+            "sGithubUsername": "amotin",
+            "sLocationMatched": "us",
+            "sName": "Alexander Motin",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "info@siteograf.com",
+            "sGithubUrl": "https://github.com/bogutski",
+            "sGithubUsername": "bogutski",
+            "sLocationMatched": "us",
+            "sName": "Viktor Bogutskii",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "labriola@digitalprimates.net",
+            "sGithubUrl": "https://github.com/labriola",
+            "sGithubUsername": "labriola",
+            "sLocationMatched": "us",
+            "sName": "Michael Labriola",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "me@sunnysingh.io",
+            "sGithubUrl": "https://github.com/sunnysingh",
+            "sGithubUsername": "sunnysingh",
+            "sLocationMatched": "us",
+            "sName": "Sunny Singh",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "bk2204+TMDuaNZ621SL@phthalo.io",
+            "sGithubUrl": "https://github.com/bk2204",
+            "sGithubUsername": "bk2204",
+            "sLocationMatched": "us",
+            "sName": "brian m. carlson",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "joeypabalinas@gmail.com",
+            "sGithubUrl": "https://github.com/alyptik",
+            "sGithubUsername": "alyptik",
+            "sLocationMatched": "us",
+            "sName": "Joey Pabalinas (jp)",
+            "sScrapedUrl": "https://github.com/search?l=&p=18&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=19&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=19&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "lettersfree.com@gmail.com",
+            "sGithubUrl": "https://github.com/lettersfree",
+            "sGithubUsername": "lettersfree",
+            "sLocationMatched": "us",
+            "sName": "Marisa Ritzman",
+            "sScrapedUrl": "https://github.com/search?l=&p=19&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "sbatsche@redhat.com",
+            "sGithubUrl": "https://github.com/hexfusion",
+            "sGithubUsername": "hexfusion",
+            "sLocationMatched": "us",
+            "sName": "Sam Batschelet",
+            "sScrapedUrl": "https://github.com/search?l=&p=19&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "jcorbin@wunjo.org",
+            "sGithubUrl": "https://github.com/jcorbin",
+            "sGithubUsername": "jcorbin",
+            "sLocationMatched": "us",
+            "sName": "Joshua T Corbin",
+            "sScrapedUrl": "https://github.com/search?l=&p=19&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "soubhi.hadri@gmail.com",
+            "sGithubUrl": "https://github.com/SubhiH",
+            "sGithubUsername": "SubhiH",
+            "sLocationMatched": "us",
+            "sName": "Soubhi Hadri",
+            "sScrapedUrl": "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "art.barstow@gmail.com",
+            "sGithubUrl": "https://github.com/AFBarstow",
+            "sGithubUsername": "AFBarstow",
+            "sLocationMatched": "us",
+            "sName": "Arthur Barstow",
+            "sScrapedUrl": "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "matthew@matthewmcvickar.com",
+            "sGithubUrl": "https://github.com/matthewmcvickar",
+            "sGithubUsername": "matthewmcvickar",
+            "sLocationMatched": "us",
+            "sName": "Matthew McVickar",
+            "sScrapedUrl": "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "aleksejs@popovs.lv",
+            "sGithubUrl": "https://github.com/popoffka",
+            "sGithubUsername": "popoffka",
+            "sLocationMatched": "us",
+            "sName": "Aleksejs Popovs",
+            "sScrapedUrl": "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "rajivshah1@icloud.com",
+            "sGithubUrl": "https://github.com/rajivshah3",
+            "sGithubUsername": "rajivshah3",
+            "sLocationMatched": "us",
+            "sName": "Rajiv Shah",
+            "sScrapedUrl": "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "725mrm@gmail.com",
+            "sGithubUrl": "https://github.com/MrMallIronmaker",
+            "sGithubUsername": "MrMallIronmaker",
+            "sLocationMatched": "us",
+            "sName": "Mark Miller",
+            "sScrapedUrl": "https://github.com/search?l=&p=20&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "briggse@protonmail.com",
+            "sGithubUrl": "https://github.com/I3uckwheat",
+            "sGithubUsername": "I3uckwheat",
+            "sLocationMatched": "us",
+            "sName": "Briggs Elsperger",
+            "sScrapedUrl": "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "niels.bantilan@gmail.com",
+            "sGithubUrl": "https://github.com/cosmicBboy",
+            "sGithubUsername": "cosmicBboy",
+            "sLocationMatched": "us",
+            "sName": "Niels Bantilan",
+            "sScrapedUrl": "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "akash.brain@gmail.com",
+            "sGithubUrl": "https://github.com/akashgit",
+            "sGithubUsername": "akashgit",
+            "sLocationMatched": "us",
+            "sName": "Akash Srivastava",
+            "sScrapedUrl": "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "charlie.knudsen@smartthings.com",
+            "sGithubUrl": "https://github.com/charliek",
+            "sGithubUsername": "charliek",
+            "sLocationMatched": "us",
+            "sName": "Charlie Knudsen",
+            "sScrapedUrl": "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "dotps1@outlook.com",
+            "sGithubUrl": "https://github.com/dotps1",
+            "sGithubUsername": "dotps1",
+            "sLocationMatched": "us",
+            "sName": "Thomas Malkewitz",
+            "sScrapedUrl": "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "roba269@gmail.com",
+            "sGithubUrl": "https://github.com/roba269",
+            "sGithubUsername": "roba269",
+            "sLocationMatched": "us",
+            "sName": "Liang He",
+            "sScrapedUrl": "https://github.com/search?l=&p=21&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=22&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=22&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "d8ec5eb0@opayq.com",
+            "sGithubUrl": "https://github.com/BTLibrary",
+            "sGithubUsername": "BTLibrary",
+            "sLocationMatched": "us",
+            "sName": "Byte",
+            "sScrapedUrl": "https://github.com/search?l=&p=22&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "alethea@alethearose.com",
+            "sGithubUrl": "https://github.com/alethea",
+            "sGithubUsername": "alethea",
+            "sLocationMatched": "us",
+            "sName": "Alethea Rose",
+            "sScrapedUrl": "https://github.com/search?l=&p=22&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "zzjin@cs.jhu.edu",
+            "sGithubUrl": "https://github.com/zhengzhongjin",
+            "sGithubUsername": "zhengzhongjin",
+            "sLocationMatched": "us",
+            "sName": "Zhengzhong Jin",
+            "sScrapedUrl": "https://github.com/search?l=&p=22&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "wdchromium@gmail.com",
+            "sGithubUrl": "https://github.com/hexparrot",
+            "sGithubUsername": "hexparrot",
+            "sLocationMatched": "us",
+            "sName": "William Dizon",
+            "sScrapedUrl": "https://github.com/search?l=&p=22&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=23&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=23&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "jason.ertle@gmail.com",
+            "sGithubUrl": "https://github.com/jlertle",
+            "sGithubUsername": "jlertle",
+            "sLocationMatched": "us",
+            "sName": "Jason Lee Ertle",
+            "sScrapedUrl": "https://github.com/search?l=&p=23&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "info@libraw.org",
+            "sGithubUrl": "https://github.com/LibRaw",
+            "sGithubUsername": "LibRaw",
+            "sLocationMatched": "us",
+            "sName": "LibRaw LLC",
+            "sScrapedUrl": "https://github.com/search?l=&p=23&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "im@liamrahav.me",
+            "sGithubUrl": "https://github.com/liamrahav",
+            "sGithubUsername": "liamrahav",
+            "sLocationMatched": "us",
+            "sName": "Liam Rahav",
+            "sScrapedUrl": "https://github.com/search?l=&p=23&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "philipp@zoonman.com",
+            "sGithubUrl": "https://github.com/zoonman",
+            "sGithubUsername": "zoonman",
+            "sLocationMatched": "us",
+            "sName": "Philipp",
+            "sScrapedUrl": "https://github.com/search?l=&p=23&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "sidney@seesharprun.net",
+            "sGithubUrl": "https://github.com/seesharprun",
+            "sGithubUsername": "seesharprun",
+            "sLocationMatched": "us",
+            "sName": "Sidney Andrews",
+            "sScrapedUrl": "https://github.com/search?l=&p=23&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "sdmitry@gmail.com",
+            "sGithubUrl": "https://github.com/dsabanin",
+            "sGithubUsername": "dsabanin",
+            "sLocationMatched": "us",
+            "sName": "Dima Sabanin",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "joerbowers@gmail.com",
+            "sGithubUrl": "https://github.com/joeatwork",
+            "sGithubUsername": "joeatwork",
+            "sLocationMatched": "us",
+            "sName": "Joe Bowers",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "bcarlso@leantechniques.co",
+            "sGithubUrl": "https://github.com/bcarlso",
+            "sGithubUsername": "bcarlso",
+            "sLocationMatched": "us",
+            "sName": "Brandon Carlson",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "i.am@michaelraichelson.com",
+            "sGithubUrl": "https://github.com/mraichelson",
+            "sGithubUsername": "mraichelson",
+            "sLocationMatched": "us",
+            "sName": "Michael Raichelson",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "ktuan89@gmail.com",
+            "sGithubUrl": "https://github.com/ktuan89",
+            "sGithubUsername": "ktuan89",
+            "sLocationMatched": "us",
+            "sName": "Anh Tuan Khuc",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "bigo@crisidev.org",
+            "sGithubUrl": "https://github.com/crisidev",
+            "sGithubUsername": "crisidev",
+            "sLocationMatched": "us",
+            "sName": "Matteo Bigoi",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "lc267@duke.edu",
+            "sGithubUrl": "https://github.com/LiqunChen0606",
+            "sGithubUsername": "LiqunChen0606",
+            "sLocationMatched": "us",
+            "sName": "Liqun Chen",
+            "sScrapedUrl": "https://github.com/search?l=&p=24&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "silveritdean@gmail.com",
+            "sGithubUrl": "https://github.com/CitruXonve",
+            "sGithubUsername": "CitruXonve",
+            "sLocationMatched": "us",
+            "sName": "Yixuan XU",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mail@chrisvogt.me",
+            "sGithubUrl": "https://github.com/chrisvogt",
+            "sGithubUsername": "chrisvogt",
+            "sLocationMatched": "us",
+            "sName": "Chris Vogt",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "entropy.xcy@hotmail.com",
+            "sGithubUrl": "https://github.com/Entropy-xcy",
+            "sGithubUsername": "Entropy-xcy",
+            "sLocationMatched": "us",
+            "sName": "Entropy Xu",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "CharltonSmith@outlook.com",
+            "sGithubUrl": "https://github.com/Mr-Smithy-x",
+            "sGithubUsername": "Mr-Smithy-x",
+            "sLocationMatched": "us",
+            "sName": "C. Smith Jr",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "larry+github@l2g.to",
+            "sGithubUrl": "https://github.com/L2G",
+            "sGithubUsername": "L2G",
+            "sLocationMatched": "us",
+            "sName": "Larry Gilbert",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "aicra@faqlinux.com",
+            "sGithubUrl": "https://github.com/ch1x0r",
+            "sGithubUsername": "ch1x0r",
+            "sLocationMatched": "us",
+            "sName": "Marcia Wilbur",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "richard40148@gmail.com",
+            "sGithubUrl": "https://github.com/RichardYang40148",
+            "sGithubUsername": "RichardYang40148",
+            "sLocationMatched": "us",
+            "sName": "Li-Chia(Richard) Yang",
+            "sScrapedUrl": "https://github.com/search?l=&p=25&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=26&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=26&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "j@joshua-anderson.com",
+            "sGithubUrl": "https://github.com/Joshua-Anderson",
+            "sGithubUsername": "Joshua-Anderson",
+            "sLocationMatched": "us",
+            "sName": "Joshua Anderson",
+            "sScrapedUrl": "https://github.com/search?l=&p=26&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "ivanpeng916@gmail.com",
+            "sGithubUrl": "https://github.com/shuapeng",
+            "sGithubUsername": "shuapeng",
+            "sLocationMatched": "us",
+            "sName": "Ivan",
+            "sScrapedUrl": "https://github.com/search?l=&p=26&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "dgtized@gmail.com",
+            "sGithubUrl": "https://github.com/dgtized",
+            "sGithubUsername": "dgtized",
+            "sLocationMatched": "us",
+            "sName": "Charles Comstock",
+            "sScrapedUrl": "https://github.com/search?l=&p=26&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "ablocker@gmail.com",
+            "sGithubUrl": "https://github.com/awblocker",
+            "sGithubUsername": "awblocker",
+            "sLocationMatched": "us",
+            "sName": "Alexander W Blocker",
+            "sScrapedUrl": "https://github.com/search?l=&p=26&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "echelon@gmail.com",
+            "sGithubUrl": "https://github.com/echelon",
+            "sGithubUsername": "echelon",
+            "sLocationMatched": "us",
+            "sName": "Brandon Thomas",
+            "sScrapedUrl": "https://github.com/search?l=&p=26&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "stuart.hinson@gmail.com",
+            "sGithubUrl": "https://github.com/stuarth",
+            "sGithubUsername": "stuarth",
+            "sLocationMatched": "us",
+            "sName": "Stuart Hinson",
+            "sScrapedUrl": "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "kagami@chaos.moe",
+            "sGithubUrl": "https://github.com/chaoskagami",
+            "sGithubUsername": "chaoskagami",
+            "sLocationMatched": "us",
+            "sName": "Jon F",
+            "sScrapedUrl": "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "boris.ginsburg@gmail.com",
+            "sGithubUrl": "https://github.com/borisgin",
+            "sGithubUsername": "borisgin",
+            "sLocationMatched": "us",
+            "sName": "Boris Ginsburg",
+            "sScrapedUrl": "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "support@ecommerce-team.com",
+            "sGithubUrl": "https://github.com/EcommerceTeam",
+            "sGithubUsername": "EcommerceTeam",
+            "sLocationMatched": "us",
+            "sName": "Magento Development",
+            "sScrapedUrl": "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "wesley@sifive.com",
+            "sGithubUrl": "https://github.com/terpstra",
+            "sGithubUsername": "terpstra",
+            "sLocationMatched": "us",
+            "sName": "Wesley W. Terpstra",
+            "sScrapedUrl": "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "turuncu@ucar.edu",
+            "sGithubUrl": "https://github.com/uturuncoglu",
+            "sGithubUsername": "uturuncoglu",
+            "sLocationMatched": "us",
+            "sName": "Ufuk Turunçoğlu",
+            "sScrapedUrl": "https://github.com/search?l=&p=27&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=28&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=28&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "conni_h@outlook.com",
+            "sGithubUrl": "https://github.com/Connicpu",
+            "sGithubUsername": "Connicpu",
+            "sLocationMatched": "us",
+            "sName": "Connie Hilarides",
+            "sScrapedUrl": "https://github.com/search?l=&p=28&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "karlg@kgeographer.org",
+            "sGithubUrl": "https://github.com/kgeographer",
+            "sGithubUsername": "kgeographer",
+            "sLocationMatched": "us",
+            "sName": "Karl Grossner",
+            "sScrapedUrl": "https://github.com/search?l=&p=28&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "anton@antonpeck.com",
+            "sGithubUrl": "https://github.com/antonpeck",
+            "sGithubUsername": "antonpeck",
+            "sLocationMatched": "us",
+            "sName": "Anton Peck",
+            "sScrapedUrl": "https://github.com/search?l=&p=28&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "xenith@xenith.org",
+            "sGithubUrl": "https://github.com/xenith",
+            "sGithubUsername": "xenith",
+            "sLocationMatched": "us",
+            "sName": "Justin Seabrook-Rocha",
+            "sScrapedUrl": "https://github.com/search?l=&p=28&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=29&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=29&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "arrpoOutputRows": [{
+            "sEmail": "link2j.roy@gmail.com",
+            "sGithubUrl": "https://github.com/RohitRox",
+            "sGithubUsername": "RohitRox",
+            "sLocationMatched": "us",
+            "sName": "Rohit Joshi",
+            "sScrapedUrl": "https://github.com/search?l=&p=29&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "theli.ua@gmail.com",
+            "sGithubUrl": "https://github.com/theli-ua",
+            "sGithubUsername": "theli-ua",
+            "sLocationMatched": "us",
+            "sName": "Anton Romanov",
+            "sScrapedUrl": "https://github.com/search?l=&p=29&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "mxiao666@gmail.com",
+            "sGithubUrl": "https://github.com/mxiao6",
+            "sGithubUsername": "mxiao6",
+            "sLocationMatched": "us",
+            "sName": "Mingze",
+            "sScrapedUrl": "https://github.com/search?l=&p=29&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "annika@sixohthree.com",
+            "sGithubUrl": "https://github.com/abackstrom",
+            "sGithubUsername": "abackstrom",
+            "sLocationMatched": "us",
+            "sName": "Annika Backstrom",
+            "sScrapedUrl": "https://github.com/search?l=&p=29&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }, {
+            "sEmail": "ashutosh.nath.agarwal@gmail.com",
+            "sGithubUrl": "https://github.com/ash7594",
+            "sGithubUsername": "ash7594",
+            "sLocationMatched": "us",
+            "sName": "Ashutosh Nath Agarwal",
+            "sScrapedUrl": "https://github.com/search?l=&p=29&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }],
+        "oNextInputRecord": {
+            "sLocationMatched": "us",
+            "sScrapedUrl": "https://github.com/search?l=&p=30&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93"
+        }
+    },
+    "https://github.com/search?l=&p=30&q=location%3A%22us%22&ref=advsearch&type=Users&utf8=%E2%9C%93": {
+        "err": {}
+    },
+    "https://github.com/search?utf8=%E2%9C%93&q=location%3A%22united states%22&type=Users&ref=advsearch&l=&l=": {
+        "err": {}
+    }
+}
