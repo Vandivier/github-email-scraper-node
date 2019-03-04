@@ -216,7 +216,7 @@ async function fpWriteCache() {
     reorder({
       input: sOutputFilePath, // too bad input can't be sBeautifiedData
       output: sOrderedOutputFilePath,
-      sort: 'Entry ID',
+      sort: oServiceThis.oTitleLine[oServiceThis.sUniqueKey],
     })
       .then(metadata => {
         console.log('Program completed.');
