@@ -166,7 +166,10 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
 
   if (Array.isArray(oDereferencedResult.arrpoOutputRows) && oDereferencedResult.arrpoOutputRows.length) {
     // one input record produces an array of output records
-    oDereferencedResult.arrpoOutputRows.forEach(fsRecordToCsvLine);
+    oDereferencedResult.arrpoOutputRows.forEach(oOutputRow => {
+      oCache[oOutputRow[oServiceThis.sUniqueKey]] = oOutputRow;
+      fsRecordToCsvLine(oOutputRow);
+    });
   }
 
   if (oDereferencedResult.oNextInputRecord && fbIsValidUrlToScrape(oDereferencedResult.oNextInputRecord.sScrapedUrl)) {
