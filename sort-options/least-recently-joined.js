@@ -28,7 +28,7 @@ function fsGetUrlToScrapeByInputRecord(oInputRecord) {
   return (
     oInputRecord.sScrapedUrl ||
     (oInputRecord.sLocationMatched &&
-      'https://github.com/search?utf8=%E2%9C%93&q=location%3A%22' + oInputRecord.sLocationMatched + '%22&type=Users&ref=advsearch&l=&l=')
+      'https://github.com/search?l=&o=asc&q=location%3A%22' + oInputRecord.sLocationMatched + '%22&s=joined&type=Users')
   );
 }
 
