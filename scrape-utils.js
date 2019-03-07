@@ -208,7 +208,7 @@ async function fpEndProgram() {
   }
 
   await fpWriteCache();
-  process.exit();
+  if (oServiceThis.bExitWhenDone) process.exit();
 }
 
 async function fpWriteCache() {
