@@ -222,11 +222,13 @@ async function fpWriteCache() {
       sort: oServiceThis.oTitleLine[oServiceThis.sUniqueKey],
     })
       .then(metadata => {
-        console.log('Program completed.');
+        console.log('fpWriteCache completed succesfully.');
       })
       .catch(error => {
-        console.log('Program completed with error.', error);
+        console.log('Error during fpWriteCache.', error);
       });
+
+    return Promise.resolve();
   });
 
   return Promise.resolve();
