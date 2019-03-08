@@ -60,5 +60,10 @@ typings/
 # next.js build output
 .next
 
-#github credentials
+# github credentials
 creds.js
+
+# obfuscate scrape results
+cache.json
+output.csv
+ordered-output.csv
