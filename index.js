@@ -47,13 +47,17 @@ fpEvaluate = async oInputRecord => {
       }
 
       return {
-        sEmail: $email.textContent,
-        sGithubUrl: $user.querySelector('a').href,
-        sGithubUsername: $user.querySelector('a').text,
-        sLocationMatched: oInputRecord.sLocationMatched,
-        sName: $user.querySelector('div.d-block') && $user.querySelector('div.d-block').textContent,
-        sScrapedUrl: oInputRecord.sScrapedUrl,
+        sEmail: sSanitize($email.textContent),
+        sGithubUrl: $user.querySelector('a') && sSanitize($user.querySelector('a').href),
+        sGithubUsername: $user.querySelector('a') && sSanitize($user.querySelector('a').text),
+        sLocationMatched: sSanitize(oInputRecord.sLocationMatched),
+        sName: $user.querySelector('div.d-block') && sSanitize($user.querySelector('div.d-block').textContent),
+        sScrapedUrl: sSanitize(oInputRecord.sScrapedUrl),
       };
+
+      function sSanitize(s) {
+        return s && s.replace(/["'<>,]/g, '').trim();
+      }
     });
 
     return {
