@@ -53,10 +53,11 @@ fpEvaluate = async oInputRecord => {
         sLocationMatched: sSanitize(oInputRecord.sLocationMatched),
         sName: $user.querySelector('div.d-block') && sSanitize($user.querySelector('div.d-block').textContent),
         sScrapedUrl: sSanitize(oInputRecord.sScrapedUrl),
+        sScrapeDate: new Date().toLocaleDateString(),
       };
 
       function sSanitize(s) {
-        return s && s.replace(/["'<>,]/g, '').trim();
+        return s && s.replace(/["'<>,\\]/g, '').trim();
       }
     });
 
