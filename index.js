@@ -18,6 +18,7 @@ const oTitleLine = {
   sLocationMatched: 'Location',
   sName: 'Name',
   sScrapedUrl: 'Scraped Url',
+  sScrapeDate: 'Scrape Date', // undefined is before 3/8
 };
 
 sUniqueKey = 'sEmail';
@@ -74,12 +75,10 @@ fpEvaluate = async oInputRecord => {
 // ref: https://github.com/emadehsan/thal
 // TODO: login and logout routines are similar so some logic could be extracted to a function
 fpbLogin = async page => {
-  let bLogoutResolved = false;
   let bLoginResolved = false;
   const USERNAME_SELECTOR = '#login_field';
   const PASSWORD_SELECTOR = '#password';
   const BUTTON_SELECTOR = 'input[type=submit][name=commit]';
-  const BUTTON_LOGOUT_SELECTOR = 'input[value="Sign out"]';
 
   await page.goto('https://github.com/login');
   let sSignedInText = await page.evaluate(

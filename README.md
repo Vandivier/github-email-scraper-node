@@ -29,12 +29,10 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
 
 ## TODO
 
-1. key oCache of both sScrapedUrl and sUniqueKey;
+1. key off arbitrary function and include key as an output
 
-2. deal with invalid commas and quotes interior to cell values. Eg [Brody](https://github.com/Ryan-B-W).
-
-3. scrape for each Github sorting option, and include which sorting option an entry is initially obtained from
-
-   1. maybe collect all sorting options under which result appears
-
-   2. maybe find some way to access unobserved records (rn I can only get ~7k / 50k for location "united states")
+2. seperate scripts to:
+   1. scrape into cache.json
+   2. post-process cache.json into post-processed.json
+   3. write post-processed.json into output.csv and ordered-output.csv
+   4. mailgun functionality, and synthesize/merge ordered-output.csv with analysis.csv or w/e
