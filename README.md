@@ -31,8 +31,20 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
 
 1. key off arbitrary function and include key as an output
 
-2. seperate scripts to:
-   1. scrape into cache.json
-   2. post-process cache.json into post-processed.json
-   3. write post-processed.json into output.csv and ordered-output.csv
-   4. mailgun functionality, and synthesize/merge ordered-output.csv with analysis.csv or w/e
+2. if cache.json, etc, doesn't exist, write it. so we don't assume lib user created one.
+
+3. seperate scripts to:
+   1. [scraper.js] scrape into cache.json
+   2. [wrangler.js] post-process cache.json into wrangled.json
+      1. includes mailgun functionality
+   3. [write-csv.js] write wrangled.json into output.csv and ordered-output.csv
+      1. takes json file and writes to csv with alphebetized columns
+      2. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
+   4. [merge.js] multiple csvs
+      1. use as a cli tool like `merge email csv1 csv2 csv3`
+      2. Takes all 3 csvs and makes a row with first variable (eg email) as unique column name
+      3. leftmost csv takes precedence in the case of unique key collision.
+         1. default is when a collision happens to merge records; so john@abc.com from csv1 and csv2 gets merged with columns from both csv
+         2. `--drop-dup` means john@abc.com from csv1 is included and duplicates are simply dropped from other spreadsheets
+         3. `--uniquify-dup` means john@abc.com from csv1 is included and john@abc.com from csv2 becomes john@abc.com-csv2
+      4. output has a superset of columns from any spreadsheet
