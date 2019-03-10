@@ -40,8 +40,9 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
    2. [wrangler.js] post-process cache.json into wrangled.json
    3. includes mailgun functionality
    4. [write-csv.js] write wrangled.json into output.csv and ordered-output.csv
+      1. debug like `node --inspect-brk write-csv cache cache-2 --UniqueKey=sEmail`
       1. takes json file and writes to csv with alphebetized columns
-      2. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
+      1. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
    5. [merge.js] multiple csvs
       1. `write-csv` has --merge option instead of merge.js
       2. without --merge then write-csv makes multiple output for multiple input
@@ -53,4 +54,3 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
          3. `--uniquify-dup` means john@abc.com from csv1 is included and john@abc.com from csv2 becomes john@abc.com-csv2
          4. conflicting options take alphabetical precedence
       6. output has a superset of columns from any spreadsheet
-5. implicit title line; hungarian-to-english; --keys-camel or --keys-title options available as well

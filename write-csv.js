@@ -1,11 +1,9 @@
-const reorder = require('csv-reorder');
+const fs = require('fs');
+const util = require('util');
 const utils = require('ella-utils');
 
 const arrsCsvs = [];
-const arroCaches = [];
-
-const sOrderedOutputFilePath = './ordered-output.csv';
-const sOutputFilePath = './output.csv';
+let arroCaches = [];
 
 const fpReadFile = util.promisify(fs.readFile);
 const fpWriteFile = util.promisify(fs.writeFile);
@@ -19,46 +17,30 @@ const oOptions = {
   sUniqueKey: '',
 };
 
-function fsRecordToCsvLine(oRecord, sFileName) {}
-
-/*
-function fpOrderCsv() {
-  const oReorderResponse = await reorder({
-    input: sOutputFilePath, // too bad input can't be sBeautifiedData
-    output: sOrderedOutputFilePath,
-    sort: oServiceThis.oTitleLine[oServiceThis.sUniqueKey],
-  })
-    .then(metadata => {
-      console.log('fpWriteCache completed succesfully.');
-    })
-    .catch(error => {
-      console.log('Error during fpWriteCache.', error);
-    });
-
-  return oReorderResponse;
-}
-*/
-
 async function main() {
   fParseOptions();
 
   try {
-    arroCaches = arrsCsvs.map(async sFile => await fpReadFile(sFile + '.json', 'utf8'));
+    const arrpReadFiles = arrsCsvs.map(async sFile => {
+      const sCacheFile = await fpReadFile(sFile + '.json', 'utf8');
+      return JSON.parse(sCacheFile);
+    });
+
+    arroCaches = await Promise.all(arrpReadFiles);
   } catch (e) {
     console.error('Error reading one of the files you specified. Are you sure you ran that command correctly?', e);
     process.exit();
   }
 
-  debugger;
-
   if (oOptions.mergeFiles) fMergeCaches();
+  debugger;
 
   // write caches to csvs
   // TODO: regex to skip some records
   const arrp = arroCaches.map(async (oCache, i) => {
-    const oTitleLine = oCache[sUniqueKey]; // explicit title line is optional
+    const oTitleLine = oCache[oOptions.sUniqueKey]; // explicit title line is optional
     const sOutputFileName = arroCaches.length > 1 ? arrsCsvs[i] + '.csv' : 'output.csv';
-    const arrTableColumnKeys = oTitleLine[sUniqueKey]
+    const arrTableColumnKeys = oTitleLine[oOptions.sUniqueKey]
       ? Object.values(oTitleLine).sort()
       : Object.keys(Object.values(oCache)[0])
           .map(fNormalizeVariableName)
@@ -67,7 +49,7 @@ async function main() {
     if (!oWriteStreams[sOutputFileName]) oWriteStreams[sOutputFileName] = fs.createWriteStream(sOutputFileName);
 
     Object.values(oCache)
-      .sort((oA, oB) => (oA[sUniqueKey] > oB[sUniqueKey] ? 1 : -1))
+      .sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1))
       .map(o => utils.fsRecordToCsvLine(o, arrTableColumnKeys, oWriteStreams[sOutputFileName]));
 
     return Promise.resolve();
@@ -105,8 +87,6 @@ function fParseOptions() {
   }
 
   if (!arrsCsvs.length) arrsCsvs.push('cache');
-
-  debugger;
 }
 
 function fMergeCaches() {
@@ -119,19 +99,18 @@ function fMergeCaches() {
       if (oExistingRecord) {
         if (oOptions.mergeDuplicates) {
           // existing column values survive; only overwrite unpopulated columns
-          oCurrentCacheAcc[sRecordKey] = Object.assign({}, oNew, oExisting);
+          oCurrentCacheAcc[sNewRecordKey] = Object.assign({}, oNew, oExisting);
         }
         // else do nothing; the existing record survives and current record is dropped
       } else {
-        oCurrentCacheAcc[sRecordKey] = Object.assign({}, oCurrentRecord);
+        oCurrentCacheAcc[sNewRecordKey] = Object.assign({}, oCurrentRecord);
       }
 
       return oCurrentCacheAcc;
     }, oMergedCacheAcc);
   }, {});
 
-  arroCaches.splice(arroCaches.length); // clear without reassigning
-  arroCaches.push(oMergedCache);
+  arroCaches = [oMergedCache];
 }
 
 // by default, turns hungarian or title cased into Title Spaced Case
