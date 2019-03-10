@@ -1,36 +1,27 @@
 const beautify = require('js-beautify').js_beautify;
 const EOL = require('os').EOL;
 const fs = require('fs');
-const reorder = require('csv-reorder');
 const puppeteer = require('puppeteer');
 const util = require('util');
 const utils = require('ella-utils');
 
-const sCacheFilePath = './cache.json';
-const sOrderedOutputFilePath = './ordered-output.csv';
-const sInputFilePath = './input.csv'; // TODO: use rsReadStream
-const sOutputFilePath = './output.csv';
-
 const fpReadFile = util.promisify(fs.readFile);
-const fpWriteFile = util.promisify(fs.writeFile);
+
+const sCacheFilePath = './cache.json';
+const sInputFilePath = './input.csv';
+
+let oCache = JSON.parse(fs.readFileSync(sCacheFilePath, 'utf8'));
+
+let iCurrentInputRecord = 0;
+let iTotalInputRecords = 0;
 
 let oServiceThis = {
   browser: {},
 };
 
-let oCache = JSON.parse(fs.readFileSync(sCacheFilePath, 'utf8'));
-//const rsReadStream = fs.createReadStream('./location-strings.txt');
-const wsWriteStream = fs.createWriteStream(sOutputFilePath);
-
-let iCurrentInputRecord = 0;
-let iTotalInputRecords = 0;
-
 oServiceThis.exec = async function(oConfig) {
   try {
     oServiceThis = Object.assign(oServiceThis, oConfig);
-
-    oServiceThis.arrTableColumnKeys = Object.keys(oServiceThis.oTitleLine);
-
     await main();
   } catch (e) {
     console.log('error caught in exec', e);
@@ -43,7 +34,6 @@ async function main() {
   let sInputCsv;
   let arrsInputRows;
 
-  fsRecordToCsvLine(oServiceThis.oTitleLine);
   sInputCsv = await fpReadFile(sInputFilePath, 'utf8');
   arrsInputRows = sInputCsv.split(EOL).filter(sLine => sLine); // drop title line and empty trailing lines
 
@@ -52,12 +42,13 @@ async function main() {
     arrsInputRows = arrsInputRows.slice(0, process.env.SUBSAMPLE);
   }
 
+  oCache[oServiceThis.sUniqueKey] = oTitleLine;
   arrsInputRows.shift(); // drop title row
   iTotalInputRecords = arrsInputRows.length;
 
   if (typeof oCache !== 'object' || !iTotalInputRecords) {
     // don't waste time or requests if there's a problem
-    console.log('error obtaining oFirstNameCache');
+    console.log('error obtaining cached data');
     await fpEndProgram();
   }
 
@@ -65,7 +56,6 @@ async function main() {
   oServiceThis.browser = process.env.DEBUG ? await puppeteer.launch({ headless: false }) : await puppeteer.launch();
 
   if (oServiceThis.fpbLogin) {
-    // TODO: do i need to be logged into scrape page or just scrape browser?
     console.log('logging in');
     const page = await oServiceThis.browser.newPage();
 
@@ -81,7 +71,6 @@ async function main() {
   }
 
   await utils.forEachReverseAsyncPhased(arrsInputRows, async function(_sInputRecord) {
-    // TODO: automatically detect title line and expand object using oTitleLine
     const arrsCells = _sInputRecord.split(',');
     const arrsInputColumnTitles = Object.keys(oServiceThis.oSourceMap) || [];
 
@@ -168,7 +157,6 @@ oServiceThis.fpScrapeInputWrapper = async function(oInputRecord) {
     // one input record produces an array of output records
     oDereferencedResult.arrpoOutputRows.forEach(oOutputRow => {
       oCache[oOutputRow[oServiceThis.sUniqueKey]] = oOutputRow;
-      fsRecordToCsvLine(oOutputRow);
     });
   }
 
@@ -198,10 +186,6 @@ oServiceThis.fpEvaluate = async function(oInputRecord) {
   return Promise.resolve([]);
 };
 
-function fsRecordToCsvLine(oRecord) {
-  utils.fsRecordToCsvLine(oRecord, oServiceThis.arrTableColumnKeys, wsWriteStream);
-}
-
 async function fpEndProgram() {
   if (oServiceThis.browser) {
     await oServiceThis.browser.close();
@@ -211,31 +195,14 @@ async function fpEndProgram() {
   if (oServiceThis.bExitWhenDone) process.exit();
 }
 
-async function fpWriteCache() {
-  let sBeautifiedData = JSON.stringify(oCache);
-  sBeautifiedData = beautify(sBeautifiedData, { indent_size: 4 });
-
-  await fpWriteFile(sCacheFilePath, sBeautifiedData, 'utf8', err => {
-    reorder({
-      input: sOutputFilePath, // too bad input can't be sBeautifiedData
-      output: sOrderedOutputFilePath,
-      sort: oServiceThis.oTitleLine[oServiceThis.sUniqueKey],
-    })
-      .then(metadata => {
-        console.log('fpWriteCache completed succesfully.');
-      })
-      .catch(error => {
-        console.log('Error during fpWriteCache.', error);
-      });
-
-    return Promise.resolve();
-  });
-
-  return Promise.resolve();
-}
-
 function fbIsValidUrlToScrape(s) {
   return s && typeof s === 'string' && /(http)(s)*(:\/\/)(.)*\.(\w+)/.test(s);
+}
+
+function fpWriteCache() {
+  let sBeautifiedData = JSON.stringify(oCache);
+  sBeautifiedData = beautify(sBeautifiedData, { indent_size: 4 });
+  return fpWriteFile(sCacheFilePath, sBeautifiedData, 'utf8', err => {});
 }
 
 module.exports = oServiceThis;

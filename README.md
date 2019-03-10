@@ -31,20 +31,26 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
 
 1. key off arbitrary function and include key as an output
 
-2. if cache.json, etc, doesn't exist, write it. so we don't assume lib user created one.
+2. business documentation for the whole workflow: index, wrangler, write-csv, their options, etc.
 
-3. seperate scripts to:
+3. if cache.json, etc, doesn't exist, write it. so we don't assume lib user created one.
+
+4. seperate scripts to:
    1. [scraper.js] scrape into cache.json
    2. [wrangler.js] post-process cache.json into wrangled.json
-      1. includes mailgun functionality
-   3. [write-csv.js] write wrangled.json into output.csv and ordered-output.csv
+   3. includes mailgun functionality
+   4. [write-csv.js] write wrangled.json into output.csv and ordered-output.csv
       1. takes json file and writes to csv with alphebetized columns
       2. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
-   4. [merge.js] multiple csvs
-      1. use as a cli tool like `merge email csv1 csv2 csv3`
-      2. Takes all 3 csvs and makes a row with first variable (eg email) as unique column name
-      3. leftmost csv takes precedence in the case of unique key collision.
+   5. [merge.js] multiple csvs
+      1. `write-csv` has --merge option instead of merge.js
+      2. without --merge then write-csv makes multiple output for multiple input
+      3. use as a cli tool like `merge email csv1 csv2 csv3`
+      4. Takes all 3 csvs and makes a row with first variable (eg email) as unique column name
+      5. leftmost csv takes precedence in the case of unique key collision.
          1. default is when a collision happens to merge records; so john@abc.com from csv1 and csv2 gets merged with columns from both csv
          2. `--drop-dup` means john@abc.com from csv1 is included and duplicates are simply dropped from other spreadsheets
          3. `--uniquify-dup` means john@abc.com from csv1 is included and john@abc.com from csv2 becomes john@abc.com-csv2
-      4. output has a superset of columns from any spreadsheet
+         4. conflicting options take alphabetical precedence
+      6. output has a superset of columns from any spreadsheet
+5. implicit title line; hungarian-to-english; --keys-camel or --keys-title options available as well

@@ -1,5 +1,5 @@
-const beautify = require('js-beautify').js_beautify;
 const reorder = require('csv-reorder');
+const utils = require('ella-utils');
 
 const arrsCsvs = [];
 const arroCaches = [];
@@ -9,7 +9,8 @@ const sOutputFilePath = './output.csv';
 
 const fpReadFile = util.promisify(fs.readFile);
 const fpWriteFile = util.promisify(fs.writeFile);
-const wsWriteStream = fs.createWriteStream(sOutputFilePath);
+
+const oWriteStreams = {};
 
 const oOptions = {
   mergeFiles: false,
@@ -18,22 +19,11 @@ const oOptions = {
   sUniqueKey: '',
 };
 
-async function fpWriteCache() {
-  let sBeautifiedData = JSON.stringify(oCache);
-  sBeautifiedData = beautify(sBeautifiedData, { indent_size: 4 });
+function fsRecordToCsvLine(oRecord, sFileName) {}
 
-  await fpWriteFile(sCacheFilePath, sBeautifiedData, 'utf8', err => {});
-
-  return Promise.resolve();
-}
-
-function fsRecordToCsvLine(oRecord) {
-  utils.fsRecordToCsvLine(oRecord, oServiceThis.arrTableColumnKeys, wsWriteStream);
-}
-
+/*
 function fpOrderCsv() {
-  // TODO: can I return reorder?
-  reorder({
+  const oReorderResponse = await reorder({
     input: sOutputFilePath, // too bad input can't be sBeautifiedData
     output: sOrderedOutputFilePath,
     sort: oServiceThis.oTitleLine[oServiceThis.sUniqueKey],
@@ -45,11 +35,13 @@ function fpOrderCsv() {
       console.log('Error during fpWriteCache.', error);
     });
 
-  return Promise.resolve();
+  return oReorderResponse;
 }
+*/
 
 async function main() {
   fParseOptions();
+
   try {
     arroCaches = arrsCsvs.map(async sFile => await fpReadFile(sFile + '.json', 'utf8'));
   } catch (e) {
@@ -60,6 +52,28 @@ async function main() {
   debugger;
 
   if (oOptions.mergeFiles) fMergeCaches();
+
+  // write caches to csvs
+  // TODO: regex to skip some records
+  const arrp = arroCaches.map(async (oCache, i) => {
+    const oTitleLine = oCache[sUniqueKey]; // explicit title line is optional
+    const sOutputFileName = arroCaches.length > 1 ? arrsCsvs[i] + '.csv' : 'output.csv';
+    const arrTableColumnKeys = oTitleLine[sUniqueKey]
+      ? Object.values(oTitleLine).sort()
+      : Object.keys(Object.values(oCache)[0])
+          .map(fNormalizeVariableName)
+          .sort();
+
+    if (!oWriteStreams[sOutputFileName]) oWriteStreams[sOutputFileName] = fs.createWriteStream(sOutputFileName);
+
+    Object.values(oCache)
+      .sort((oA, oB) => (oA[sUniqueKey] > oB[sUniqueKey] ? 1 : -1))
+      .map(o => utils.fsRecordToCsvLine(o, arrTableColumnKeys, oWriteStreams[sOutputFileName]));
+
+    return Promise.resolve();
+  });
+
+  await Promise.all(arrp);
 }
 
 // yargs === overengineering
@@ -118,6 +132,40 @@ function fMergeCaches() {
 
   arroCaches.splice(arroCaches.length); // clear without reassigning
   arroCaches.push(oMergedCache);
+}
+
+// by default, turns hungarian or title cased into Title Spaced Case
+// with --keys-camel, turns camel case into Title Spaced Case
+function fNormalizeVariableName(s) {
+  const arriCapitals = getAllIndexes([...s], s => /[A-Z]/.test(s));
+  let iPrevious = oOptions.keyscamel ? 0 : null;
+
+  arriCapitals.push(s.length);
+
+  return arriCapitals
+    .reduce((arrsAcc, i) => {
+      if (iPrevious) {
+        arrsAcc.push(s.slice(iPrevious, i));
+      }
+
+      iPrevious = i;
+
+      return arrsAcc;
+    }, [])
+    .join(' ');
+}
+
+// ref: https://stackoverflow.com/questions/20798477/how-to-find-index-of-all-occurrences-of-element-in-array
+function getAllIndexes(arr, f) {
+  const indexes = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (f(arr[i])) {
+      indexes.push(i);
+    }
+  }
+
+  return indexes;
 }
 
 main();
