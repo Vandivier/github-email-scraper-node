@@ -40,12 +40,9 @@ async function main() {
   const arrp = arroCaches.map(async (oCache, i) => {
     const oTitleLine = oCache[oOptions.sUniqueKey]; // explicit title line is optional
     const sOutputFileName = arroCaches.length > 1 ? arrsCsvs[i] + '.csv' : 'output.csv';
-    const arrTableColumnKeys = oTitleLine[oOptions.sUniqueKey]
-      ? Object.values(oTitleLine).sort()
-      : Object.keys(Object.values(oCache)[0])
-          .map(fNormalizeVariableName)
-          .sort();
+    const arrTableColumnKeys = oTitleLine ? Object.values(oTitleLine).sort() : farrGetImpliedColumns(oCache);
 
+    debugger;
     if (!oWriteStreams[sOutputFileName]) oWriteStreams[sOutputFileName] = fs.createWriteStream(sOutputFileName);
 
     Object.values(oCache)
@@ -145,6 +142,19 @@ function getAllIndexes(arr, f) {
   }
 
   return indexes;
+}
+
+function farrGetImpliedColumns(oCache) {
+  try {
+    const oRepresentative = Object.values(oCache).find(oRecord => oRecord.arrpoOutputRows.length);
+
+    return Object.keys(oRepresentative)
+      .map(fNormalizeVariableName)
+      .sort();
+  } catch (error) {
+    console.log('error trying to obtain implied columns:', error);
+    return [];
+  }
 }
 
 main();
