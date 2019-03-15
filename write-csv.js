@@ -41,40 +41,26 @@ async function main() {
     const sOutputFileName = arroCaches.length > 1 ? arrsCsvs[i] + '.csv' : 'output.csv';
     const arrTableColumnKeys = Object.keys(oRepresentative);
     const oTitleLine = oCache[oOptions.sUniqueKey] || foGetImpliedTitleRecord(oRepresentative);
-    const arroSortedRecords = Object.values(oCache).sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1));
+    const arroSortedRecords = Object.values(oCache)
+      .filter(o => fUseRecord)
+      .sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1));
 
     // wipe output file
     await fpWriteFile(sOutputFileName, '', 'utf8');
 
     // write title line first
-    return [oTitleLine].concat(arroSortedRecords).map(async oParent => {
-      let arrpChildrenWritten = [];
-
+    return [oTitleLine].concat(arroSortedRecords).map(async oRecord => {
       try {
-        arrpChildrenWritten =
-          oParent.arrpoOutputRows &&
-          oParent.arrpoOutputRows.map(async oChild => {
-            const sCsvRecord = utils.fsRecordToCsvLine(oChild, arrTableColumnKeys);
-            const oWriteResult = await fpAppendFile(sOutputFileName, sCsvRecord + EOL, 'utf8');
-            return Promise.resolve(oWriteResult);
-          });
-
-        if (!arrpChildrenWritten) arrpChildrenWritten = [];
+        const sCsvRecord = utils.fsRecordToCsvLine(oRecord, arrTableColumnKeys);
+        const oWriteResult = await fpAppendFile(sOutputFileName, sCsvRecord + EOL, 'utf8');
+        return Promise.resolve(oWriteResult);
       } catch (error) {
-        console.log('error writing children: ', error, oParent);
-        debugger;
-        arrpChildrenWritten = [];
+        console.log('error writing record: ', error);
       }
-
-      if (!oParent.arrpoOutputRows) {
-        debugger;
-      }
-
-      return Promise.all(arrpChildrenWritten);
     });
   });
 
-  await Promise.all(arrp); // just for debugging really. TODO: is this working?
+  await Promise.all(arrp);
 }
 
 // yargs === overengineering
@@ -168,9 +154,7 @@ function getAllIndexes(arr, f) {
 
 function fGetRepresentativeRecord(oCache) {
   try {
-    const oParent = Object.values(oCache).find(oRecord => oRecord.arrpoOutputRows && oRecord.arrpoOutputRows.length);
-    const oRepresentative = oParent && oParent.arrpoOutputRows && oParent.arrpoOutputRows[0];
-    return oRepresentative;
+    return Object.values(oCache).find(fUseRecord);
   } catch (error) {
     console.log('error trying to obtain representative record:', error);
     return {};
@@ -184,6 +168,12 @@ function foGetImpliedTitleRecord(oRepresentative) {
     console.log('error trying to obtain implied title record:', error);
     return {};
   }
+}
+
+// ref: TODO 4.3.4, `drop-key` implementation
+// for now we just ensure written records include unique key
+function fUseRecord(o) {
+  return o[oOptions.sUniqueKey];
 }
 
 main();
