@@ -42,14 +42,17 @@ async function main() {
     const arrTableColumnKeys = Object.keys(oRepresentative);
     const oTitleLine = oCache[oOptions.sUniqueKey] || foGetImpliedTitleRecord(oRepresentative);
     const arroSortedRecords = Object.values(oCache)
-      .filter(o => fUseRecord)
+      .filter(o => fUseRecord(o))
       .sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1));
 
     // wipe output file
     await fpWriteFile(sOutputFileName, '', 'utf8');
 
     // write title line first
-    return [oTitleLine].concat(arroSortedRecords).map(async oRecord => {
+    return [oTitleLine].concat(arroSortedRecords).map(async (oRecord, i) => {
+      // only write title line as first line (don't write twice)
+      if (oRecord[oOptions.sUniqueKey] === oTitleLine[oOptions.sUniqueKey] && i) return Promise.resolve();
+
       try {
         const sCsvRecord = utils.fsRecordToCsvLine(oRecord, arrTableColumnKeys);
         const oWriteResult = await fpAppendFile(sOutputFileName, sCsvRecord + EOL, 'utf8');
