@@ -33,26 +33,26 @@ async function main() {
   }
 
   if (oOptions.mergeFiles) fMergeCaches();
-  debugger;
 
   // write caches to csvs
   // TODO: regex to skip some records
   const arrp = arroCaches.map(async (oCache, i) => {
-    const oTitleLine = oCache[oOptions.sUniqueKey]; // explicit title line is optional
+    const oRepresentative = fGetRepresentativeRecord(oCache);
     const sOutputFileName = arroCaches.length > 1 ? arrsCsvs[i] + '.csv' : 'output.csv';
-    const arrTableColumnKeys = oTitleLine ? Object.values(oTitleLine).sort() : farrGetImpliedColumns(oCache);
+    const arrTableColumnKeys = Object.keys(oRepresentative);
+    const oTitleLine = oCache[oOptions.sUniqueKey] || foGetImpliedTitleRecord(oRepresentative);
+    const arroRecords = [...Object.values(oCache).concat([oTitleLine])];
 
-    debugger;
     if (!oWriteStreams[sOutputFileName]) oWriteStreams[sOutputFileName] = fs.createWriteStream(sOutputFileName);
 
-    Object.values(oCache)
+    arroRecords
       .sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1))
       .map(o => utils.fsRecordToCsvLine(o, arrTableColumnKeys, oWriteStreams[sOutputFileName]));
 
     return Promise.resolve();
   });
 
-  await Promise.all(arrp);
+  const arrWriteResult = await Promise.all(arrp); // just for debugging really. TODO: is this working?
 }
 
 // yargs === overengineering
@@ -144,16 +144,23 @@ function getAllIndexes(arr, f) {
   return indexes;
 }
 
-function farrGetImpliedColumns(oCache) {
+function fGetRepresentativeRecord(oCache) {
   try {
-    const oRepresentative = Object.values(oCache).find(oRecord => oRecord.arrpoOutputRows.length);
-
-    return Object.keys(oRepresentative)
-      .map(fNormalizeVariableName)
-      .sort();
+    const oParent = Object.values(oCache).find(oRecord => oRecord.arrpoOutputRows && oRecord.arrpoOutputRows.length);
+    const oRepresentative = oParent && oParent.arrpoOutputRows && oParent.arrpoOutputRows[0];
+    return oRepresentative;
   } catch (error) {
-    console.log('error trying to obtain implied columns:', error);
-    return [];
+    console.log('error trying to obtain representative record:', error);
+    return {};
+  }
+}
+
+function foGetImpliedTitleRecord(oRepresentative) {
+  try {
+    return Object.keys(oRepresentative).reduce((oAcc, sKey) => Object.assign(oAcc, { [sKey]: fNormalizeVariableName(sKey) }), {});
+  } catch (error) {
+    console.log('error trying to obtain implied title record:', error);
+    return {};
   }
 }
 
