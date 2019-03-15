@@ -6,11 +6,12 @@ const util = require('util');
 const utils = require('ella-utils');
 
 const fpReadFile = util.promisify(fs.readFile);
+const fpWriteFile = util.promisify(fs.writeFile);
 
 const sCacheFilePath = './cache.json';
 const sInputFilePath = './input.csv';
 
-let oCache = JSON.parse(fs.readFileSync(sCacheFilePath, 'utf8'));
+let oCache = {};
 
 let iCurrentInputRecord = 0;
 let iTotalInputRecords = 0;
@@ -34,6 +35,13 @@ async function main() {
   let sInputCsv;
   let arrsInputRows;
 
+  try {
+    oCache = JSON.parse(fs.readFileSync(sCacheFilePath, 'utf8'));
+  } catch (error) {
+    // ref: https://stackoverflow.com/a/31195572/3931488
+    oCache = {};
+  }
+
   sInputCsv = await fpReadFile(sInputFilePath, 'utf8');
   arrsInputRows = sInputCsv.split(EOL).filter(sLine => sLine); // drop title line and empty trailing lines
 
@@ -42,7 +50,7 @@ async function main() {
     arrsInputRows = arrsInputRows.slice(0, process.env.SUBSAMPLE);
   }
 
-  oCache[oServiceThis.sUniqueKey] = oTitleLine;
+  oCache[oServiceThis.sUniqueKey] = oServiceThis.oTitleLine;
   arrsInputRows.shift(); // drop title row
   iTotalInputRecords = arrsInputRows.length;
 
