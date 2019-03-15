@@ -64,6 +64,6 @@ typings/
 creds.js
 
 # obfuscate scrape results
-cache.json
+cache*.json
 output.csv
 ordered-output.csv
