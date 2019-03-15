@@ -1,3 +1,4 @@
+const EOL = require('os').EOL;
 const fs = require('fs');
 const util = require('util');
 const utils = require('ella-utils');
@@ -5,10 +6,9 @@ const utils = require('ella-utils');
 const arrsCsvs = [];
 let arroCaches = [];
 
+const fpAppendFile = util.promisify(fs.appendFile);
 const fpReadFile = util.promisify(fs.readFile);
 const fpWriteFile = util.promisify(fs.writeFile);
-
-const oWriteStreams = {};
 
 const oOptions = {
   mergeFiles: false,
@@ -41,18 +41,40 @@ async function main() {
     const sOutputFileName = arroCaches.length > 1 ? arrsCsvs[i] + '.csv' : 'output.csv';
     const arrTableColumnKeys = Object.keys(oRepresentative);
     const oTitleLine = oCache[oOptions.sUniqueKey] || foGetImpliedTitleRecord(oRepresentative);
-    const arroRecords = [...Object.values(oCache).concat([oTitleLine])];
+    const arroSortedRecords = Object.values(oCache).sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1));
 
-    if (!oWriteStreams[sOutputFileName]) oWriteStreams[sOutputFileName] = fs.createWriteStream(sOutputFileName);
+    // wipe output file
+    await fpWriteFile(sOutputFileName, '', 'utf8');
 
-    arroRecords
-      .sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1))
-      .map(o => utils.fsRecordToCsvLine(o, arrTableColumnKeys, oWriteStreams[sOutputFileName]));
+    // write title line first
+    return [oTitleLine].concat(arroSortedRecords).map(async oParent => {
+      let arrpChildrenWritten = [];
 
-    return Promise.resolve();
+      try {
+        arrpChildrenWritten =
+          oParent.arrpoOutputRows &&
+          oParent.arrpoOutputRows.map(async oChild => {
+            const sCsvRecord = utils.fsRecordToCsvLine(oChild, arrTableColumnKeys);
+            const oWriteResult = await fpAppendFile(sOutputFileName, sCsvRecord + EOL, 'utf8');
+            return Promise.resolve(oWriteResult);
+          });
+
+        if (!arrpChildrenWritten) arrpChildrenWritten = [];
+      } catch (error) {
+        console.log('error writing children: ', error, oParent);
+        debugger;
+        arrpChildrenWritten = [];
+      }
+
+      if (!oParent.arrpoOutputRows) {
+        debugger;
+      }
+
+      return Promise.all(arrpChildrenWritten);
+    });
   });
 
-  const arrWriteResult = await Promise.all(arrp); // just for debugging really. TODO: is this working?
+  await Promise.all(arrp); // just for debugging really. TODO: is this working?
 }
 
 // yargs === overengineering
