@@ -3,7 +3,7 @@ const fs = require('fs');
 const util = require('util');
 const utils = require('ella-utils');
 
-const arrsCsvs = [];
+const arrsOutputCsvs = [];
 let arroCaches = [];
 
 const fpAppendFile = util.promisify(fs.appendFile);
@@ -21,7 +21,7 @@ async function main() {
   fParseOptions();
 
   try {
-    const arrpReadFiles = arrsCsvs.map(async sFile => {
+    const arrpReadFiles = arrsOutputCsvs.map(async sFile => {
       const sCacheFile = await fpReadFile(sFile + '.json', 'utf8');
       return JSON.parse(sCacheFile);
     });
@@ -38,7 +38,7 @@ async function main() {
   // TODO: regex to skip some records
   const arrp = arroCaches.map(async (oCache, i) => {
     const oRepresentative = fGetRepresentativeRecord(oCache);
-    const sOutputFileName = arroCaches.length > 1 ? arrsCsvs[i] + '.csv' : 'output.csv';
+    const sOutputFileName = arroCaches.length > 1 ? arrsOutputCsvs[i] + '.csv' : 'output.csv';
     const arrTableColumnKeys = Object.keys(oRepresentative);
     const oTitleLine = oCache[oOptions.sUniqueKey] || foGetImpliedTitleRecord(oRepresentative);
     const arroSortedRecords = Object.values(oCache)
@@ -78,7 +78,7 @@ function fParseOptions() {
     } else if (s.includes('--')) {
       oOptions[_fCleanValue(s)] = true;
     } else {
-      arrsCsvs.push(s);
+      arrsOutputCsvs.push(s);
     }
   });
 
@@ -94,7 +94,7 @@ function fParseOptions() {
     process.exit();
   }
 
-  if (!arrsCsvs.length) arrsCsvs.push('cache');
+  if (!arrsOutputCsvs.length) arrsOutputCsvs.push('cache');
 }
 
 function fMergeCaches() {
