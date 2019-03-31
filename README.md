@@ -41,10 +41,17 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
    2. [wrangler.js] post-process cache.json into wrangled.json
    3. includes mailgun functionality
    4. [write-csv.js] write wrangled.json into output.csv and ordered-output.csv
-      1. debug like `node write-csv cache cache-2 --UniqueKey=sEmail`
-      2. takes json file and writes to csv with alphebetized columns
-      3. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
-   5. [merge.js] multiple csvs
+      1. use like `node write-csv cache cache-2 --UniqueKey=sEmail`
+      2. debug like `node --inspect-brk write-csv cache cache-2 --UniqueKey=sEmail`
+      3. takes json file and writes to csv with alphebetized columns
+      4. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
+   5. unwrite-csv.js
+      1. use like `node unwrite-csv my-csv-file-name --UniqueKey=sEmailAddress`
+         1. or, `node unwrite-csv my-csv-file-name --UniqueColumn="Email Address"`
+         2. eventually I may support multiple input csv, but currently just one
+      2. debug like `node --inspect-brk unwrite-csv cache cache-2 --UniqueKey=sEmail`
+      3. takes csv file and produces a json file
+   6. [merge.js] multiple csvs
       1. In theory, should be able to merge json or csv. in practice, it's csv merge rn.
       2. It's a sugar which invokes `unwrite-csv` then `write-csv` on a collection of csvs. The result is a many-to-one csv merge.
       3. use as a cli tool like `merge email csv1 csv2 csv3`
@@ -58,3 +65,5 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
       7. output has a superset of columns from any spreadsheet
 
 5. it would be nice if cache file were updated with every scrape instead of at the end. that way we could stop early if we want and crash salvage
+
+6. in principle we don't need seperate write-csv and unwrite-csv. both scripts follow a similar lifecycle so they could be a single generic. you could have mixed .csv and .json input and specify .json or .csv output.
