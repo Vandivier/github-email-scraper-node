@@ -46,11 +46,12 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
       3. takes json file and writes to csv with alphebetized columns
       4. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
    5. unwrite-csv.js
-      1. use like `node unwrite-csv my-csv-file-name --UniqueKey=sEmailAddress`
-         1. or, `node unwrite-csv my-csv-file-name --UniqueColumn="Email Address"`
+      1. use like `node unwrite-csv my-csv-file-name --UniqueKey=sRespondentId`
+         1. or, `node unwrite-csv "Survey on Alternative Credentials" --UniqueColumn="Respondent ID"`
          2. eventually I may support multiple input csv, but currently just one
-      2. debug like `node --inspect-brk unwrite-csv cache cache-2 --UniqueKey=sEmail`
+      2. debug like `node --inspect-brk unwrite-csv "Survey on Alternative Credentials" --UniqueColumn="Respondent ID"`
       3. takes csv file and produces a json file
+      4. TODO: if no UniqueKey or UniqueColumn, use row number as unique ID.
    6. [merge.js] multiple csvs
       1. In theory, should be able to merge json or csv. in practice, it's csv merge rn.
       2. It's a sugar which invokes `unwrite-csv` then `write-csv` on a collection of csvs. The result is a many-to-one csv merge.

@@ -1,7 +1,9 @@
 const EOL = require('os').EOL;
 const fs = require('fs');
 const util = require('util');
+
 const arrsOutputFiles = []; // currently only 1 at a time is supported
+const oColumnSuperset = {};
 
 const fpReadFile = util.promisify(fs.readFile);
 const fpWriteFile = util.promisify(fs.writeFile);
@@ -17,14 +19,16 @@ const oOptions = {
 async function main() {
   fParseOptions();
 
+  debugger;
   try {
     // TODO: fix below
     const arrpReadFiles = arrsOutputFiles.map(async sFile => {
-      const sCacheFile = await fpReadFile(sFile + '.json', 'utf8');
-      return JSON.parse(sCacheFile);
+      const sCacheFile = await fpReadFile(sFile + '.csv', 'utf8');
+      return foParseCsvToJson(sCacheFile);
     });
 
     arroCaches = await Promise.all(arrpReadFiles);
+    debugger;
   } catch (e) {
     console.error('Error reading one of the files you specified. Are you sure you ran that command correctly?', e);
     process.exit();
@@ -65,10 +69,41 @@ async function main() {
   await Promise.all(arrp);
 }
 
+function foParseCsvToJson(sUnparsedCsvFile) {
+  const arrarrsParsed = CSVToArray(sUnparsedCsvFile);
+  const arrsTitleLine = arrarrsParsed[0];
+  const arrsHungarianizedTitleLine = arrsTitleLine.map(fsCreateHungarianNameFromColumnTitleString);
+  const arrarrsParsedWithoutTitleLine = arrarrsParsed.slice(1);
+  const iUniqueKeyIndex = arrsHungarianizedTitleLine.find(oOptions.sUniqueKey);
+
+  if (iUniqueKeyIndex === -1) {
+    console.log('spreadsheet unexpectedly did not have unique key / column. exiting.');
+    process.exit();
+  }
+
+  arrarrsParsedWithoutTitleLine.forEach(arrsRow => {
+    const sRecordKey = arrsRow[iUniqueKeyIndex];
+    const oRecord = arrsTitleLine.reduce((oAcc, sCellValue, iColumnIndex) => {
+      const sHungarianColumnName = arrsHungarianizedTitleLine[iColumnIndex];
+      oAcc[sHungarianColumnName] = sCellValue;
+      return oAcc;
+    }, {});
+
+    if (oColumnSuperset[sRecordKey]) {
+      // TODO: explore other reconciliation strategies besides just skipping.
+      console.log('duplicate record found. skipping: ', arrsRow);
+    } else {
+      oColumnSuperset[sRecordKey] = Object.assign({}, oRecord);
+    }
+  });
+
+  return arrarrsParsed;
+}
+
 // yargs === overengineering
 function fParseOptions() {
   function _fCleanValue(s) {
-    return s && s.trim().replace(/[^\w]/g, '');
+    return s && s.trim().replace(/[^\w ]/g, '');
   }
 
   process.argv.slice(2).forEach(s => {
@@ -82,7 +117,7 @@ function fParseOptions() {
     } else if (s.includes('--')) {
       oOptions[_fCleanValue(s)] = true;
     } else {
-      arrsOutputCsvs.push(s);
+      arrsOutputFiles.push(s);
     }
   });
 
@@ -152,8 +187,10 @@ function fsCreateHungarianNameFromColumnTitleString(sCleanedColumn) {
 }
 
 function fsTitleCase(sWord) {
-  const sLowerCasedWord = sWord.toLowerCase();
-  return sLowerCasedWord[0].toUpperCase() + sLowerCasedWord.slice(1);
+  const sLowerCasedWord = sWord && sWord.toLowerCase();
+  const sResult = sLowerCasedWord[0] ? sLowerCasedWord[0].toUpperCase() + sLowerCasedWord.slice(1) : '';
+  if (!sResult) console.log('unexpected empty result in fsTitleCase for word: ', sWord);
+  return sResult;
 }
 
 // ref: https://stackoverflow.com/questions/20798477/how-to-find-index-of-all-occurrences-of-element-in-array
@@ -191,6 +228,74 @@ function foGetImpliedTitleRecord(oRepresentative) {
 // for now we just ensure written records include unique key
 function fUseRecord(o) {
   return o[oOptions.sUniqueKey];
+}
+
+// ref: https://stackoverflow.com/questions/1293147/javascript-code-to-parse-csv-data
+function CSVToArray(strData, strDelimiter) {
+  // Check to see if the delimiter is defined. If not,
+  // then default to comma.
+  strDelimiter = strDelimiter || ',';
+
+  // Create a regular expression to parse the CSV values.
+  var objPattern = new RegExp(
+    // Delimiters.
+    '(\\' +
+      strDelimiter +
+      '|\\r?\\n|\\r|^)' +
+      // Quoted fields.
+      '(?:"([^"]*(?:""[^"]*)*)"|' +
+      // Standard fields.
+      '([^"\\' +
+      strDelimiter +
+      '\\r\\n]*))',
+    'gi'
+  );
+
+  // Create an array to hold our data. Give the array
+  // a default empty first row.
+  var arrData = [[]];
+
+  // Create an array to hold our individual pattern
+  // matching groups.
+  var arrMatches = null;
+
+  // Keep looping over the regular expression matches
+  // until we can no longer find a match.
+  while ((arrMatches = objPattern.exec(strData))) {
+    // Get the delimiter that was found.
+    var strMatchedDelimiter = arrMatches[1];
+
+    // Check to see if the given delimiter has a length
+    // (is not the start of string) and if it matches
+    // field delimiter. If id does not, then we know
+    // that this delimiter is a row delimiter.
+    if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
+      // Since we have reached a new row of data,
+      // add an empty row to our data array.
+      arrData.push([]);
+    }
+
+    var strMatchedValue;
+
+    // Now that we have our delimiter out of the way,
+    // let's check to see which kind of value we
+    // captured (quoted or unquoted).
+    if (arrMatches[2]) {
+      // We found a quoted value. When we capture
+      // this value, unescape any double quotes.
+      strMatchedValue = arrMatches[2].replace(new RegExp('""', 'g'), '"');
+    } else {
+      // We found a non-quoted value.
+      strMatchedValue = arrMatches[3];
+    }
+
+    // Now that we have our value string, let's add
+    // it to the data array.
+    arrData[arrData.length - 1].push(strMatchedValue);
+  }
+
+  // Return the parsed data.
+  return arrData;
 }
 
 main();

@@ -69,7 +69,7 @@ async function main() {
 // yargs === overengineering
 function fParseOptions() {
   function _fCleanValue(s) {
-    return s && s.trim().replace(/[^\w]/g, '');
+    return s && s.trim().replace(/[^\w ]/g, '');
   }
 
   process.argv.slice(2).forEach(s => {
