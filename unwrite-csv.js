@@ -19,7 +19,6 @@ const oOptions = {
 async function main() {
   fParseOptions();
 
-  debugger;
   try {
     // TODO: fix below
     const arrpReadFiles = arrsOutputFiles.map(async sFile => {
@@ -74,6 +73,7 @@ function foParseCsvToJson(sUnparsedCsvFile) {
   const arrsTitleLine = arrarrsParsed[0];
   const arrsHungarianizedTitleLine = arrsTitleLine.map(fsCreateHungarianNameFromColumnTitleString);
   const arrarrsParsedWithoutTitleLine = arrarrsParsed.slice(1);
+  debugger;
   const iUniqueKeyIndex = arrsHungarianizedTitleLine.find(oOptions.sUniqueKey);
 
   if (iUniqueKeyIndex === -1) {
@@ -114,7 +114,7 @@ function fParseOptions() {
       oOptions.sUniqueKey = sCleanedValue;
     } else if (sLowered.includes('uniquecolumn')) {
       oOptions.sUniqueKey = fsCreateHungarianNameFromColumnTitleString(sCleanedValue);
-    } else if (s.includes('--')) {
+    } else if (s.slice(0, 2) === '--') {
       oOptions[_fCleanValue(s)] = true;
     } else {
       arrsOutputFiles.push(s);
@@ -162,28 +162,28 @@ function fMergeCaches() {
 
 // by default, turns hungarian or title cased into Title Spaced Case
 // with --keys-camel, turns camel case into Title Spaced Case
-function fNormalizeVariableName(s) {
-  const arriCapitals = getAllIndexes([...s], s => /[A-Z]/.test(s));
+function fNormalizeVariableName(sOldName, bToVariable) {
+  const sCleanedName = sOldName.replace(/ /g, '');
+  const arriCapitals = getAllIndexes([...sCleanedName], sLetter => /[A-Z]/.test(sLetter));
   let iPrevious = oOptions.keyscamel ? 0 : null;
 
-  arriCapitals.push(s.length);
+  arriCapitals.push(sCleanedName.length);
 
   return arriCapitals
     .reduce((arrsAcc, i) => {
-      if (iPrevious) {
-        arrsAcc.push(s.slice(iPrevious, i));
+      if (Number.isInteger(iPrevious)) {
+        arrsAcc.push(sCleanedName.slice(iPrevious, Math.max(iPrevious + 1, i))); // at least increment one letter
       }
 
       iPrevious = i;
 
       return arrsAcc;
     }, [])
-    .join(' ');
+    .join(bToVariable ? '' : ' ');
 }
 
 function fsCreateHungarianNameFromColumnTitleString(sCleanedColumn) {
-  const arrs = sCleanedColumn.split(' ');
-  return 's' + arrs.map(fsTitleCase).join('');
+  return 's' + fNormalizeVariableName(sCleanedColumn, true);
 }
 
 function fsTitleCase(sWord) {

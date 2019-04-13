@@ -46,7 +46,7 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
       3. takes json file and writes to csv with alphebetized columns
       4. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
    5. unwrite-csv.js
-      1. use like `node unwrite-csv my-csv-file-name --UniqueKey=sRespondentId`
+      1. use like `node unwrite-csv my-csv-file-name --UniqueKey=sRespondentID`
          1. or, `node unwrite-csv "Survey on Alternative Credentials" --UniqueColumn="Respondent ID"`
          2. eventually I may support multiple input csv, but currently just one
       2. debug like `node --inspect-brk unwrite-csv "Survey on Alternative Credentials" --UniqueColumn="Respondent ID"`
