@@ -1,9 +1,9 @@
+const beautify = require('js-beautify').js_beautify;
 const EOL = require('os').EOL;
 const fs = require('fs');
 const util = require('util');
 
 const arrsOutputFiles = []; // currently only 1 at a time is supported
-const oColumnSuperset = {};
 
 const fpReadFile = util.promisify(fs.readFile);
 const fpWriteFile = util.promisify(fs.writeFile);
@@ -27,7 +27,6 @@ async function main() {
     });
 
     arroCaches = await Promise.all(arrpReadFiles);
-    debugger;
   } catch (e) {
     console.error('Error reading one of the files you specified. Are you sure you ran that command correctly?', e);
     process.exit();
@@ -35,37 +34,20 @@ async function main() {
 
   if (oOptions.mergeFiles) fMergeCaches();
 
-  // write caches to csvs
-  // TODO: regex to skip some records
+  // write json file outputs
   const arrp = arroCaches.map(async (oCache, i) => {
-    const oRepresentative = fGetRepresentativeRecord(oCache);
-    const sOutputFileName = arroCaches.length > 1 ? arrsOutputFiles[i] + '.csv' : 'output.csv';
-    const arrTableColumnKeys = Object.keys(oRepresentative);
-    const oTitleLine = oCache[oOptions.sUniqueKey] || foGetImpliedTitleRecord(oRepresentative);
-    const arroSortedRecords = Object.values(oCache)
-      .filter(o => fUseRecord(o))
-      .sort((oA, oB) => (oA[oOptions.sUniqueKey] > oB[oOptions.sUniqueKey] ? 1 : -1));
-
-    // wipe output file
-    await fpWriteFile(sOutputFileName, '', 'utf8');
-
-    // write title line first
-    return [oTitleLine].concat(arroSortedRecords).map(async (oRecord, i) => {
-      // only write title line as first line (don't write twice)
-      if (oRecord[oOptions.sUniqueKey] === oTitleLine[oOptions.sUniqueKey] && i) return Promise.resolve();
-
-      try {
-        // write json file
-        //const sCsvRecord = utils.fsRecordToCsvLine(oRecord, arrTableColumnKeys);
-        const oWriteResult = await fpAppendFile(sOutputFileName, sCsvRecord + EOL, 'utf8');
-        return Promise.resolve(oWriteResult);
-      } catch (error) {
-        console.log('error writing record: ', error);
-      }
-    });
+    const sOutputFileName = arrsOutputFiles[i] + '.json';
+    return fpWriteCache(sOutputFileName, oCache);
   });
 
   await Promise.all(arrp);
+}
+
+// TODO: duplicate block in /github-email-scraper-node/index.js
+function fpWriteCache(sOutputFileName, oCache) {
+  let sBeautifiedData = JSON.stringify(oCache);
+  sBeautifiedData = beautify(sBeautifiedData, { indent_size: 4 });
+  return fpWriteFile(sOutputFileName, sBeautifiedData, 'utf8', err => {}); // silence errors...honestly idk why those happen and output is fine so...
 }
 
 function foParseCsvToJson(sUnparsedCsvFile) {
@@ -73,8 +55,8 @@ function foParseCsvToJson(sUnparsedCsvFile) {
   const arrsTitleLine = arrarrsParsed[0];
   const arrsHungarianizedTitleLine = arrsTitleLine.map(fsCreateHungarianNameFromColumnTitleString);
   const arrarrsParsedWithoutTitleLine = arrarrsParsed.slice(1);
-  debugger;
-  const iUniqueKeyIndex = arrsHungarianizedTitleLine.find(oOptions.sUniqueKey);
+  const iUniqueKeyIndex = arrsHungarianizedTitleLine.findIndex(s => s === oOptions.sUniqueKey);
+  const oParsedFile = {};
 
   if (iUniqueKeyIndex === -1) {
     console.log('spreadsheet unexpectedly did not have unique key / column. exiting.');
@@ -83,21 +65,23 @@ function foParseCsvToJson(sUnparsedCsvFile) {
 
   arrarrsParsedWithoutTitleLine.forEach(arrsRow => {
     const sRecordKey = arrsRow[iUniqueKeyIndex];
-    const oRecord = arrsTitleLine.reduce((oAcc, sCellValue, iColumnIndex) => {
+    const oRecord = arrsRow.reduce((oAcc, sCellValue, iColumnIndex) => {
       const sHungarianColumnName = arrsHungarianizedTitleLine[iColumnIndex];
       oAcc[sHungarianColumnName] = sCellValue;
       return oAcc;
     }, {});
 
-    if (oColumnSuperset[sRecordKey]) {
+    if (!sRecordKey) {
+      // do nothing
+    } else if (oParsedFile[sRecordKey]) {
       // TODO: explore other reconciliation strategies besides just skipping.
       console.log('duplicate record found. skipping: ', arrsRow);
     } else {
-      oColumnSuperset[sRecordKey] = Object.assign({}, oRecord);
+      oParsedFile[sRecordKey] = Object.assign({}, oRecord);
     }
   });
 
-  return arrarrsParsed;
+  return oParsedFile;
 }
 
 // yargs === overengineering
@@ -120,11 +104,6 @@ function fParseOptions() {
       arrsOutputFiles.push(s);
     }
   });
-
-  if (Object.entries(oOptions).find((sKey, sVal) => sVal)) {
-    // if any merge option exists, set merge to true as a safety measure
-    oOptions.mergeFiles = true;
-  }
 
   if (oOptions.mergeFiles && !oOptions.sUniqueKey) {
     console.error(
