@@ -139,6 +139,7 @@ function fMergeCaches() {
   arroCaches = [oMergedCache];
 }
 
+// TODO: duplicate block with write-csv.js
 // by default, turns hungarian or title cased into Title Spaced Case
 // with --keys-camel, turns camel case into Title Spaced Case
 function fNormalizeVariableName(sOldName, bToVariable) {
@@ -150,15 +151,21 @@ function fNormalizeVariableName(sOldName, bToVariable) {
 
   return arriCapitals
     .reduce((arrsAcc, i) => {
+      const bAdjacentCapitals = /[A-Z]/.test(sCleanedName[iPrevious + 1]);
+
       if (Number.isInteger(iPrevious)) {
         arrsAcc.push(sCleanedName.slice(iPrevious, Math.max(iPrevious + 1, i))); // at least increment one letter
+
+        if (!bAdjacentCapitals && !bToVariable && oOptions.bSpaceTitles) {
+          arrsAcc.push(' ');
+        }
       }
 
       iPrevious = i;
 
       return arrsAcc;
     }, [])
-    .join(bToVariable ? '' : ' ');
+    .join('');
 }
 
 function fsCreateHungarianNameFromColumnTitleString(sCleanedColumn) {

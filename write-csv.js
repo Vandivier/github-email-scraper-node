@@ -123,23 +123,30 @@ function fMergeCaches() {
 
 // by default, turns hungarian or title cased into Title Spaced Case
 // with --keys-camel, turns camel case into Title Spaced Case
-function fNormalizeVariableName(s) {
-  const arriCapitals = getAllIndexes([...s], s => /[A-Z]/.test(s));
+function fNormalizeVariableName(sOldName, bToVariable) {
+  const sCleanedName = sOldName.replace(/ /g, '');
+  const arriCapitals = getAllIndexes([...sCleanedName], sLetter => /[A-Z]/.test(sLetter));
   let iPrevious = oOptions.keyscamel ? 0 : null;
 
-  arriCapitals.push(s.length);
+  arriCapitals.push(sCleanedName.length);
 
   return arriCapitals
     .reduce((arrsAcc, i) => {
-      if (iPrevious) {
-        arrsAcc.push(s.slice(iPrevious, i));
+      const bAdjacentCapitals = /[A-Z]/.test(sCleanedName[iPrevious + 1]);
+
+      if (Number.isInteger(iPrevious)) {
+        arrsAcc.push(sCleanedName.slice(iPrevious, Math.max(iPrevious + 1, i))); // at least increment one letter
+
+        if (!bAdjacentCapitals && !bToVariable && oOptions.bSpaceTitles) {
+          arrsAcc.push(' ');
+        }
       }
 
       iPrevious = i;
 
       return arrsAcc;
     }, [])
-    .join(' ');
+    .join('');
 }
 
 // ref: https://stackoverflow.com/questions/20798477/how-to-find-index-of-all-occurrences-of-element-in-array

@@ -45,6 +45,7 @@ Be very careful if you plan to blast an email to the scraped email list. Conside
       2. debug like `node --inspect-brk write-csv cache cache-2 --UniqueKey=sEmail`
       3. takes json file and writes to csv with alphebetized columns
       4. `--drop-key=/myregex/` will cause certain keys not to be written as rows. useful to skip things if you are caching things that aren't really observations, like a page of results.
+      5. `--bSpaceTitles` will output column names like "Reported Age" instead of "ReportedAge"
    5. unwrite-csv.js
       1. use like `node unwrite-csv my-csv-file-name --UniqueKey=sRespondentID`
          1. or, `node unwrite-csv "Survey on Alternative Credentials" --UniqueColumn="Respondent ID"`
